@@ -41,7 +41,20 @@ const Hero = () => {
                 className="w-full h-full object-cover"
               />
             </CarouselItem>
-            {/* Add more CarouselItem elements here when you upload more images */}
+            <CarouselItem className="h-full">
+              <img
+                src="/lovable-uploads/243900b8-b6a6-4aa9-9ce2-eed4c60a9c52.png"
+                alt="Gothic themed cake with black roses"
+                className="w-full h-full object-cover"
+              />
+            </CarouselItem>
+            <CarouselItem className="h-full">
+              <img
+                src="/lovable-uploads/35f68459-0077-4d2d-841a-c70bd5184ac4.png"
+                alt="Heart shaped cake with gold pearls"
+                className="w-full h-full object-cover"
+              />
+            </CarouselItem>
           </CarouselContent>
           <CarouselPrevious className="left-4" />
           <CarouselNext className="right-4" />
