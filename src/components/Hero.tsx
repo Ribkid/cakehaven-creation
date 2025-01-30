@@ -24,7 +24,7 @@ const Hero = () => {
         </p>
         <Button
           className="bg-brown hover:bg-brown-dark text-cream text-lg px-8 py-6 self-start"
-          onClick={() => window.location.href = '#featured'}
+          onClick={() => window.location.href = '/order'}
         >
           Order Your Cake
         </Button>
