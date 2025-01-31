@@ -1,17 +1,35 @@
 const About = () => {
   return (
-    <section className="py-20 bg-white">
-      <div className="container">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-4xl font-serif text-brown-dark mb-6">
-            Our Story
-          </h2>
-          <p className="text-lg text-brown-light mb-8 leading-relaxed">
-            We believe that every celebration deserves the perfect cake. Our passion
-            for baking combines traditional techniques with modern creativity,
-            resulting in cakes that are as beautiful as they are delicious.
-          </p>
-          <div className="w-20 h-1 bg-gold mx-auto" />
+    <section className="py-20 bg-cream">
+      <div className="container px-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+          <div className="space-y-6">
+            <h2 className="text-4xl font-serif text-brown-dark mb-8">
+              Our Story
+            </h2>
+            <div className="space-y-6 text-brown leading-relaxed">
+              <p>
+                My journey into baking began with a deep fascination for its scientific foundations. As someone driven by curiosity and a love for understanding how things work, I found myself captivated by the intricate chemistry of baking - the delicate interplay of ingredients, the crucial role of temperature, and the precision of timing that transforms simple ingredients into extraordinary creations.
+              </p>
+              <p>
+                A serendipitous moment occurred when I noticed the striking similarities between my partner Sarah's pottery techniques and the art of working with fondant. This observation led to an exciting experiment - giving Sarah some fondant to work with. The result was nothing short of magical, as her artistic expertise translated perfectly into cake decoration.
+              </p>
+              <p>
+                Today, we've created something truly special by merging our passions - my dedication to perfecting the science of baking with Sarah's artistic vision in fondant decoration. Every cake we create is a testament to this unique collaboration, combining delicious flavors with stunning visual artistry.
+              </p>
+            </div>
+          </div>
+          <div className="relative">
+            <div className="rounded-lg overflow-hidden shadow-xl">
+              <img
+                src="/lovable-uploads/02076538-f58e-4987-b2f5-52505383d566.png"
+                alt="Head baker in chef's whites"
+                className="w-full object-cover rounded-lg"
+              />
+            </div>
+            <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-gold opacity-10 rounded-full -z-10" />
+            <div className="absolute -top-6 -left-6 w-32 h-32 bg-brown opacity-10 rounded-full -z-10" />
+          </div>
         </div>
       </div>
     </section>
