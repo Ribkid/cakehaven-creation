@@ -5,14 +5,14 @@ const Navigation = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 bg-cream/80 backdrop-blur-sm z-50 border-b border-brown/20">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          <Link to="/" className="flex items-center gap-2">
+        <div className="flex items-center justify-between h-24">
+          <Link to="/" className="flex items-center gap-4">
             <img 
               src="/lovable-uploads/f59f27a0-0fe7-4b7b-a197-cccc1cd9aded.png" 
               alt="Ribsys Cakes Logo" 
-              className="h-12 w-auto"
+              className="h-20 w-auto transition-transform duration-300 hover:scale-105"
             />
-            <span className="text-2xl font-serif text-brown-dark hover:text-brown hidden sm:inline">
+            <span className="text-4xl font-bold text-brown-dark hover:text-brown hidden sm:inline" style={{ fontFamily: "'Dancing Script', cursive" }}>
               Ribsys Cakes
             </span>
           </Link>
