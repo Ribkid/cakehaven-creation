@@ -65,9 +65,20 @@ export default {
           "0%": { opacity: "0", transform: "translateY(10px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        "slide-in": {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(0)" },
+        },
+        "sparkle": {
+          "0%": { transform: "scale(0) rotate(0deg)" },
+          "50%": { transform: "scale(1) rotate(180deg)" },
+          "100%": { transform: "scale(0) rotate(360deg)" },
+        }
       },
       animation: {
         "fade-up": "fade-up 0.5s ease-out",
+        "slide-in": "slide-in 0.6s ease-out",
+        "sparkle": "sparkle 0.8s linear",
       },
     },
   },

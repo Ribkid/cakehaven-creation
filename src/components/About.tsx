@@ -3,7 +3,7 @@ const About = () => {
     <section className="py-20 bg-cream">
       <div className="container px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-          <div className="space-y-6">
+          <div className="space-y-6 animate-slide-in">
             <h2 className="text-4xl font-serif text-brown-dark mb-8">
               Our Story
             </h2>
@@ -19,8 +19,8 @@ const About = () => {
               </p>
             </div>
           </div>
-          <div className="relative">
-            <div className="rounded-lg overflow-hidden shadow-xl">
+          <div className="relative animate-fade-up" style={{ animationDelay: '300ms' }}>
+            <div className="rounded-lg overflow-hidden shadow-xl transform transition-transform duration-300 hover:scale-105">
               <img
                 src="/lovable-uploads/02076538-f58e-4987-b2f5-52505383d566.png"
                 alt="Head baker in chef's whites"

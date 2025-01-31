@@ -9,12 +9,14 @@ import Contact from "./pages/Contact";
 import Flavors from "./pages/Flavors";
 import FAQ from "./pages/FAQ";
 import Order from "./pages/Order";
+import SparkleEffect from "./components/SparkleEffect";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
+      <SparkleEffect />
       <Toaster />
       <Sonner />
       <BrowserRouter>
