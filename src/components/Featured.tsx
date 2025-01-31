@@ -2,20 +2,31 @@ import { Card, CardContent } from "./ui/card";
 
 const cakes = [
   {
-    title: "Wedding Cakes",
-    description: "Elegant and customized for your special day",
-    image: "/placeholder.svg",
+    title: "Custom Birthday Cakes",
+    description: "Personalized designs for your special day",
+    image: "/lovable-uploads/611b457a-8483-45cc-94f8-c3deac059b48.png",
   },
   {
-    title: "Birthday Cakes",
-    description: "Celebrate another year with our delicious creations",
-    image: "/placeholder.svg",
+    title: "Theme Cakes",
+    description: "From farm animals to airplanes - your imagination is the limit",
+    image: "/lovable-uploads/31b08536-3836-4802-99df-1a951d0eecc1.png",
   },
   {
-    title: "Custom Cakes",
-    description: "Your dream cake, exactly as you imagine it",
-    image: "/placeholder.svg",
+    title: "Elegant Celebration Cakes",
+    description: "Simple, sophisticated designs with a touch of luxury",
+    image: "/lovable-uploads/e0cbc0ec-20b2-47a1-807f-58c4cd30ed82.png",
   },
+];
+
+const additionalCakes = [
+  {
+    image: "/lovable-uploads/fada2d44-e418-4f7e-8555-17ffb22da323.png",
+    alt: "Custom airplane themed cake",
+  },
+  {
+    image: "/lovable-uploads/8da62372-7190-478c-9f2c-aad64d5b47a0.png",
+    alt: "Birthday cake with pink flowers",
+  }
 ];
 
 const Featured = () => {
@@ -25,7 +36,7 @@ const Featured = () => {
         <h2 className="text-4xl font-serif text-brown-dark text-center mb-12">
           Our Specialties
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {cakes.map((cake, index) => (
             <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow">
               <CardContent className="p-0">
@@ -42,6 +53,21 @@ const Featured = () => {
                 </div>
               </CardContent>
             </Card>
+          ))}
+        </div>
+
+        <h3 className="text-3xl font-serif text-brown-dark text-center mb-8">
+          Recent Creations
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {additionalCakes.map((cake, index) => (
+            <div key={index} className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+              <img
+                src={cake.image}
+                alt={cake.alt}
+                className="w-full h-80 object-cover"
+              />
+            </div>
           ))}
         </div>
       </div>
