@@ -25,11 +25,11 @@ const Hero = () => {
 
       {/* Right side image */}
       <div className="hidden lg:block w-1/2 h-screen">
-        <div className="relative w-full h-full flex items-center justify-center p-8">
+        <div className="relative w-full h-full flex items-center justify-center p-8 mt-12">
           <img
             src="/lovable-uploads/382ad5db-e7ad-47d3-bd8d-960d2a4f04f0.png"
             alt="Beautiful pink celebration cake with piped decorations"
-            className="w-full h-full object-contain transition-transform duration-500 hover:scale-105"
+            className="w-full h-full object-contain transition-transform duration-500 hover:scale-105 border-4 border-brown rounded-lg"
           />
         </div>
       </div>
