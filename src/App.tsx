@@ -9,6 +9,8 @@ import Contact from "./pages/Contact";
 import Flavors from "./pages/Flavors";
 import FAQ from "./pages/FAQ";
 import Order from "./pages/Order";
+import Admin from "./pages/Admin";
+import Auth from "./pages/Auth";
 import SparkleEffect from "./components/SparkleEffect";
 
 const queryClient = new QueryClient();
@@ -27,6 +29,8 @@ const App = () => (
           <Route path="/flavors" element={<Flavors />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/order" element={<Order />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/auth" element={<Auth />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
