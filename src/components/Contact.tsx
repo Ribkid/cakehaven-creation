@@ -50,13 +50,13 @@ const Contact = () => {
           <div className="grid gap-6">
             <div className="text-center">
               <p className="text-lg text-brown-light mb-2">
-                123 Baker Street, Sweetville
+                96 Almedia St, Indooroopilly, Brisbane
               </p>
               <p className="text-lg text-brown-light mb-2">
-                Tel: (555) 123-4567
+                Tel: 0467 613 972
               </p>
               <p className="text-lg text-brown-light mb-6">
-                Email: hello@cakery.com
+                Email: acalrhys@gmail.com
               </p>
             </div>
             
