@@ -4,12 +4,12 @@ const cakes = [
   {
     title: "Custom Birthday Cakes",
     description: "Personalized designs for your special day",
-    image: "/lovable-uploads/611b457a-8483-45cc-94f8-c3deac059b48.png",
+    image: "/lovable-uploads/3883cdc6-8080-472b-be4f-6722431640d7.png",
   },
   {
     title: "Theme Cakes",
     description: "From farm animals to airplanes - your imagination is the limit",
-    image: "/lovable-uploads/31b08536-3836-4802-99df-1a951d0eecc1.png",
+    image: "/lovable-uploads/d5346ebd-fa3e-4ed7-91ea-290ca6481b26.png",
   },
   {
     title: "Elegant Celebration Cakes",
