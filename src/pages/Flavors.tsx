@@ -5,7 +5,7 @@ const Flavors = () => {
   const cakeFlavors = [
     {
       name: "Classic Vanilla",
-      description: "Light and fluffy vanilla sponge made with Madagascar bourbon vanilla",
+      description: "Light and airy vanilla chiffon cake layered with house-made raspberry compote",
       category: "classic"
     },
     {
