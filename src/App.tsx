@@ -10,7 +10,6 @@ import Flavors from "./pages/Flavors";
 import FAQ from "./pages/FAQ";
 import Order from "./pages/Order";
 import SparkleEffect from "./components/SparkleEffect";
-import ChatBot from "./components/ChatBot";
 
 const queryClient = new QueryClient();
 
@@ -29,7 +28,6 @@ const App = () => (
           <Route path="/faq" element={<FAQ />} />
           <Route path="/order" element={<Order />} />
         </Routes>
-        <ChatBot />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
