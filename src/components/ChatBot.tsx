@@ -12,11 +12,30 @@ const ChatBot = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
-  // Clear messages when chat is closed
-  const handleClose = () => {
-    setIsOpen(false);
-    setMessages([]);
-  };
+  useEffect(() => {
+    const fetchMessages = async () => {
+      const { data, error } = await supabase
+        .from('chat_messages')
+        .select('*')
+        .order('created_at', { ascending: true });
+
+      if (error) {
+        console.error('Error fetching messages:', error);
+        return;
+      }
+
+      if (data) {
+        setMessages(data.map(msg => ({
+          role: msg.role as 'user' | 'assistant',
+          content: msg.content
+        })));
+      }
+    };
+
+    if (isOpen) {
+      fetchMessages();
+    }
+  }, [isOpen]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,7 +89,7 @@ const ChatBot = () => {
             <Button
               variant="ghost"
               size="icon"
-              onClick={handleClose}
+              onClick={() => setIsOpen(false)}
               className="hover:bg-brown-dark"
             >
               <X className="w-4 h-4 text-cream" />
