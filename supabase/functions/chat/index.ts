@@ -1,6 +1,7 @@
 import "https://deno.land/x/xhr@0.1.0/mod.ts";
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.3';
+import OpenAI from "https://deno.land/x/openai@v4.24.0/mod.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -8,6 +9,7 @@ const corsHeaders = {
 };
 
 const openAIApiKey = Deno.env.get('OPENAI_API_KEY');
+const assistantId = 'asst_95b4yEQtZEk5oobKFvpMXC3r';
 
 serve(async (req) => {
   // Handle CORS preflight requests
@@ -34,33 +36,53 @@ serve(async (req) => {
       throw new Error(`Error inserting message: ${insertError.message}`);
     }
 
-    // Get OpenAI response
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${openAIApiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'gpt-4o-mini',
-        messages: [
-          {
-            role: 'system',
-            content: 'You are a helpful cake shop assistant. You help customers with questions about cakes, orders, and general inquiries. Keep responses friendly and concise.'
-          },
-          { role: 'user', content: message }
-        ],
-      }),
+    // Initialize OpenAI client
+    const openai = new OpenAI({
+      apiKey: openAIApiKey,
     });
 
-    const data = await response.json();
-    const assistantMessage = data.choices[0].message.content;
+    // Create a new thread
+    const thread = await openai.beta.threads.create();
+
+    // Add the user's message to the thread
+    await openai.beta.threads.messages.create(thread.id, {
+      role: "user",
+      content: message,
+    });
+
+    // Run the assistant
+    const run = await openai.beta.threads.runs.create(thread.id, {
+      assistant_id: assistantId,
+    });
+
+    // Wait for the run to complete
+    let runStatus = await openai.beta.threads.runs.retrieve(thread.id, run.id);
+    
+    while (runStatus.status !== "completed") {
+      if (runStatus.status === "failed") {
+        throw new Error("Assistant run failed");
+      }
+      
+      // Wait for 1 second before checking again
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      runStatus = await openai.beta.threads.runs.retrieve(thread.id, run.id);
+    }
+
+    // Get the assistant's response
+    const messages = await openai.beta.threads.messages.list(thread.id);
+    const assistantMessage = messages.data[0].content[0];
+    
+    if (assistantMessage.type !== 'text') {
+      throw new Error('Unexpected response type from assistant');
+    }
+
+    const assistantResponse = assistantMessage.text.value;
 
     // Store assistant response in database
     const { error: assistantError } = await supabase
       .from('chat_messages')
       .insert([
-        { role: 'assistant', content: assistantMessage, order_id: orderId }
+        { role: 'assistant', content: assistantResponse, order_id: orderId }
       ]);
 
     if (assistantError) {
@@ -68,7 +90,7 @@ serve(async (req) => {
     }
 
     return new Response(
-      JSON.stringify({ message: assistantMessage }),
+      JSON.stringify({ message: assistantResponse }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   } catch (error) {
