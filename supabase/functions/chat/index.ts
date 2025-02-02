@@ -16,7 +16,7 @@ serve(async (req) => {
   }
 
   try {
-    const { message, orderId } = await req.json();
+    const { message } = await req.json();
 
     // Create Supabase client
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
@@ -27,7 +27,7 @@ serve(async (req) => {
     const { error: insertError } = await supabase
       .from('chat_messages')
       .insert([
-        { role: 'user', content: message, order_id: orderId }
+        { role: 'user', content: message }
       ]);
 
     if (insertError) {
@@ -60,7 +60,7 @@ serve(async (req) => {
     const { error: assistantError } = await supabase
       .from('chat_messages')
       .insert([
-        { role: 'assistant', content: assistantMessage, order_id: orderId }
+        { role: 'assistant', content: assistantMessage }
       ]);
 
     if (assistantError) {
