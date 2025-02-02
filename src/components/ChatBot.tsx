@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useToast } from "./ui/use-toast";
 import { MessageCircle, X } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,6 +11,31 @@ const ChatBot = () => {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+
+  useEffect(() => {
+    const fetchMessages = async () => {
+      const { data, error } = await supabase
+        .from('chat_messages')
+        .select('*')
+        .order('created_at', { ascending: true });
+
+      if (error) {
+        console.error('Error fetching messages:', error);
+        return;
+      }
+
+      if (data) {
+        setMessages(data.map(msg => ({
+          role: msg.role as 'user' | 'assistant',
+          content: msg.content
+        })));
+      }
+    };
+
+    if (isOpen) {
+      fetchMessages();
+    }
+  }, [isOpen]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,7 +47,7 @@ const ChatBot = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/chat', {
+      const response = await fetch('/functions/v1/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -39,6 +65,7 @@ const ChatBot = () => {
         description: "Failed to send message. Please try again.",
         variant: "destructive",
       });
+      console.error('Chat error:', error);
     } finally {
       setIsLoading(false);
     }
