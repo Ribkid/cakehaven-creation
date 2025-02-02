@@ -12,18 +12,17 @@ import Order from "./pages/Order";
 import Admin from "./pages/Admin";
 import Auth from "./pages/Auth";
 import SparkleEffect from "./components/SparkleEffect";
-import React from 'react';
+import * as React from 'react';
 
-// Move queryClient creation inside the component to ensure React context is available
 function App() {
-  const [queryClient] = React.useState(() => new QueryClient({
+  const queryClient = React.useMemo(() => new QueryClient({
     defaultOptions: {
       queries: {
         staleTime: 60 * 1000, // 1 minute
         retry: 1,
       },
     },
-  }));
+  }), []);
 
   return (
     <QueryClientProvider client={queryClient}>
