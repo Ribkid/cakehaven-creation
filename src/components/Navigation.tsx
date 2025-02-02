@@ -32,7 +32,7 @@ const Navigation = () => {
               <span>FAQ</span>
             </Link>
             <Link 
-              to="/contact" 
+              to="/order" 
               className="flex items-center gap-2 text-brown hover:text-brown-dark transition-colors"
             >
               <Mail className="h-4 w-4" />
