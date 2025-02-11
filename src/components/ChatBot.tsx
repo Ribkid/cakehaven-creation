@@ -58,17 +58,12 @@ const ChatBot = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('/functions/v1/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message: userMessage }),
+      const { data, error } = await supabase.functions.invoke('chat', {
+        body: { message: userMessage }
       });
 
-      if (!response.ok) throw new Error('Failed to get response');
+      if (error) throw error;
 
-      const data = await response.json();
       setMessages(prev => [...prev, { role: 'assistant', content: data.message }]);
     } catch (error) {
       toast({
