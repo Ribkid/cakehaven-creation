@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -11,6 +12,7 @@ import FAQ from "./pages/FAQ";
 import Order from "./pages/Order";
 import Admin from "./pages/Admin";
 import Auth from "./pages/Auth";
+import Pricing from "./pages/Pricing";
 import SparkleEffect from "./components/SparkleEffect";
 import * as React from 'react';
 
@@ -40,6 +42,7 @@ function App() {
             <Route path="/order" element={<Order />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/pricing" element={<Pricing />} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
