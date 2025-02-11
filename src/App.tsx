@@ -14,7 +14,6 @@ import Admin from "./pages/Admin";
 import Auth from "./pages/Auth";
 import Pricing from "./pages/Pricing";
 import SparkleEffect from "./components/SparkleEffect";
-import ChatBot from "./components/ChatBot";
 import * as React from 'react';
 
 function App() {
@@ -45,7 +44,6 @@ function App() {
             <Route path="/auth" element={<Auth />} />
             <Route path="/pricing" element={<Pricing />} />
           </Routes>
-          <ChatBot />
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
