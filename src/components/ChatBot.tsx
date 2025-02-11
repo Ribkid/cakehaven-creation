@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
+
+import { useState, useEffect, useRef } from 'react';
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useToast } from "./ui/use-toast";
-import { MessageCircle, X } from "lucide-react";
+import { MessageCircle, X, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { cn } from "@/lib/utils";
 
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,6 +13,15 @@ const ChatBot = () => {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -83,7 +94,7 @@ const ChatBot = () => {
       )}
 
       {isOpen && (
-        <div className="bg-white rounded-lg shadow-xl w-80 h-96 flex flex-col">
+        <div className="bg-white rounded-lg shadow-xl w-80 h-[500px] flex flex-col">
           <div className="p-4 bg-brown text-cream flex justify-between items-center rounded-t-lg">
             <h3 className="font-serif">Cake Assistant</h3>
             <Button
@@ -100,16 +111,18 @@ const ChatBot = () => {
             {messages.map((message, index) => (
               <div
                 key={index}
-                className={`flex ${
+                className={cn(
+                  "flex",
                   message.role === 'user' ? 'justify-end' : 'justify-start'
-                }`}
+                )}
               >
                 <div
-                  className={`max-w-[80%] p-3 rounded-lg ${
+                  className={cn(
+                    "max-w-[80%] p-3 rounded-lg",
                     message.role === 'user'
                       ? 'bg-brown text-cream ml-4'
                       : 'bg-gray-100 text-brown mr-4'
-                  }`}
+                  )}
                 >
                   {message.content}
                 </div>
@@ -117,11 +130,13 @@ const ChatBot = () => {
             ))}
             {isLoading && (
               <div className="flex justify-start">
-                <div className="bg-gray-100 text-brown p-3 rounded-lg animate-pulse">
-                  Typing...
+                <div className="bg-gray-100 text-brown p-3 rounded-lg flex items-center gap-2">
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <span>Thinking...</span>
                 </div>
               </div>
             )}
+            <div ref={messagesEndRef} />
           </div>
 
           <form onSubmit={handleSubmit} className="p-4 border-t">

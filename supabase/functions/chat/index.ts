@@ -1,3 +1,4 @@
+
 import "https://deno.land/x/xhr@0.1.0/mod.ts";
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.3';
@@ -34,6 +35,37 @@ serve(async (req) => {
       throw new Error(`Error inserting message: ${insertError.message}`);
     }
 
+    // Get chat history for context
+    const { data: chatHistory, error: historyError } = await supabase
+      .from('chat_messages')
+      .select('*')
+      .order('created_at', { ascending: true })
+      .limit(10);
+
+    if (historyError) {
+      throw new Error(`Error fetching chat history: ${historyError.message}`);
+    }
+
+    // Format messages for OpenAI
+    const messages = [
+      {
+        role: 'system',
+        content: `You are a helpful cake shop assistant for Ribsys Cakes. 
+        You help customers with questions about our cakes, pricing, and orders.
+        Our 6-inch cakes serve 12 people and cost $90 for basic and $110 for advanced designs.
+        Our 8-inch cakes serve 24 people and cost $120 for basic and $150 for advanced designs.
+        Quarter slab cakes serve 20 people and cost $110 for basic and $140 for advanced designs.
+        Half slab cakes serve 50 people and cost $150 for basic and $180 for advanced designs.
+        Full slab cakes serve 90 people and cost $200 for basic and $230 for advanced designs.
+        Cupcakes come in dozens (12) and cost $50 for basic and $75 for advanced designs.
+        Keep responses friendly, concise, and focused on helping customers.`
+      },
+      ...chatHistory.map(msg => ({
+        role: msg.role,
+        content: msg.content
+      }))
+    ];
+
     // Get OpenAI response
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
@@ -43,13 +75,8 @@ serve(async (req) => {
       },
       body: JSON.stringify({
         model: 'gpt-4o-mini',
-        messages: [
-          {
-            role: 'system',
-            content: 'You are a helpful cake shop assistant. You help customers with questions about cakes, orders, and general inquiries. Keep responses friendly and concise.'
-          },
-          { role: 'user', content: message }
-        ],
+        messages: messages,
+        temperature: 0.7,
       }),
     });
 
