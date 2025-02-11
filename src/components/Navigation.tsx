@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { Mail, Droplet, HelpCircle, DollarSign } from "lucide-react";
+import { Mail, Droplet, HelpCircle, DollarSign, Home } from "lucide-react";
 
 const Navigation = () => {
   return (
@@ -18,6 +18,13 @@ const Navigation = () => {
             </span>
           </Link>
           <div className="flex items-center space-x-8">
+            <Link 
+              to="/" 
+              className="flex items-center gap-2 text-brown hover:text-brown-dark transition-colors"
+            >
+              <Home className="h-4 w-4" />
+              <span>Home</span>
+            </Link>
             <Link 
               to="/flavors" 
               className="flex items-center gap-2 text-brown hover:text-brown-dark transition-colors"
