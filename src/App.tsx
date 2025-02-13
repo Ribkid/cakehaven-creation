@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -14,6 +13,7 @@ import Admin from "./pages/Admin";
 import Auth from "./pages/Auth";
 import Pricing from "./pages/Pricing";
 import SparkleEffect from "./components/SparkleEffect";
+import { Analytics } from "@vercel/analytics/react";
 import * as React from 'react';
 
 function App() {
@@ -45,6 +45,7 @@ function App() {
             <Route path="/pricing" element={<Pricing />} />
           </Routes>
         </BrowserRouter>
+        <Analytics />
       </TooltipProvider>
     </QueryClientProvider>
   );
