@@ -13,6 +13,7 @@ import Order from "./pages/Order";
 import Admin from "./pages/Admin";
 import Auth from "./pages/Auth";
 import Pricing from "./pages/Pricing";
+import Gallery from "./pages/Gallery";
 import SparkleEffect from "./components/SparkleEffect";
 import { Analytics } from "@vercel/analytics/react";
 import * as React from 'react';
@@ -39,6 +40,7 @@ function App() {
             <Route path="/" element={<Index />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/flavours" element={<Flavours />} />
+            <Route path="/gallery" element={<Gallery />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/order" element={<Order />} />
             <Route path="/admin" element={<Admin />} />
