@@ -1,5 +1,7 @@
 
 import { Card, CardContent } from "./ui/card";
+import { Link } from "react-router-dom";
+import { Image } from "lucide-react";
 
 const cakes = [
   {
@@ -17,25 +19,6 @@ const cakes = [
     description: "Simple, sophisticated designs with a touch of luxury",
     image: "/lovable-uploads/42c9cf37-22d3-4633-9508-75b2eea83a93.png",
   },
-];
-
-const additionalCakes = [
-  {
-    image: "/lovable-uploads/fada2d44-e418-4f7e-8555-17ffb22da323.png",
-    alt: "Custom airplane themed cake",
-  },
-  {
-    image: "/lovable-uploads/8da62372-7190-478c-9f2c-aad64d5b47a0.png",
-    alt: "Birthday cake with pink flowers",
-  },
-  {
-    image: "/lovable-uploads/31b08536-3836-4802-99df-1a951d0eecc1.png",
-    alt: "Elegant wedding cake with floral decorations",
-  },
-  {
-    image: "/lovable-uploads/57abade7-1bde-4e03-98cf-327aa9387c9e.png",
-    alt: "Colorful celebration cake with sprinkles",
-  }
 ];
 
 const Featured = () => {
@@ -73,27 +56,41 @@ const Featured = () => {
           ))}
         </div>
 
-        <h3 className="text-3xl font-serif text-brown-dark text-center mb-8 animate-fade-up">
-          Recent Creations
-        </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {additionalCakes.map((cake, index) => (
-            <div 
-              key={index} 
-              className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-              style={{ 
-                animationDelay: `${(index + 4) * 200}ms`,
-                animation: 'fade-up 0.5s ease-out forwards',
-                opacity: 0 
-              }}
-            >
+        <div className="mt-16 text-center">
+          <h3 className="text-3xl font-serif text-brown-dark mb-8 animate-fade-up">
+            Explore Our Gallery
+          </h3>
+          <div className="flex flex-col items-center space-y-6">
+            <div className="grid grid-cols-4 gap-4 max-w-3xl mx-auto mb-8">
               <img
-                src={cake.image}
-                alt={cake.alt}
-                className="w-full h-60 object-cover transition-transform duration-300 hover:scale-105"
+                src="/lovable-uploads/fada2d44-e418-4f7e-8555-17ffb22da323.png"
+                alt="Gallery preview 1"
+                className="w-full h-32 object-cover rounded-lg shadow-md"
+              />
+              <img
+                src="/lovable-uploads/8da62372-7190-478c-9f2c-aad64d5b47a0.png"
+                alt="Gallery preview 2"
+                className="w-full h-32 object-cover rounded-lg shadow-md"
+              />
+              <img
+                src="/lovable-uploads/31b08536-3836-4802-99df-1a951d0eecc1.png"
+                alt="Gallery preview 3"
+                className="w-full h-32 object-cover rounded-lg shadow-md"
+              />
+              <img
+                src="/lovable-uploads/57abade7-1bde-4e03-98cf-327aa9387c9e.png"
+                alt="Gallery preview 4"
+                className="w-full h-32 object-cover rounded-lg shadow-md"
               />
             </div>
-          ))}
+            <Link
+              to="/gallery"
+              className="inline-flex items-center gap-2 bg-brown hover:bg-brown-dark text-cream px-8 py-4 rounded-lg transition-colors text-lg font-semibold shadow-md hover:shadow-lg"
+            >
+              <Image className="w-5 h-5" />
+              View Full Gallery
+            </Link>
+          </div>
         </div>
       </div>
     </section>
