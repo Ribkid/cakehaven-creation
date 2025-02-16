@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -50,13 +51,13 @@ const Contact = () => {
           <div className="grid gap-6">
             <div className="text-center">
               <p className="text-lg text-brown-light mb-2">
-                96 Almedia St, Indooroopilly, Brisbane
+                96 Almeida St, Indooroopilly, 4068, QLD
               </p>
               <p className="text-lg text-brown-light mb-2">
                 Tel: 0467 613 972
               </p>
               <p className="text-lg text-brown-light mb-6">
-                Email: acalrhys@gmail.com
+                Email: rhys@ribsyscakes.net
               </p>
             </div>
             
