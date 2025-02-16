@@ -23,12 +23,12 @@ const cakes = [
 
 const Featured = () => {
   return (
-    <section id="featured" className="py-20 bg-cream overflow-hidden">
+    <section id="featured" className="py-12 bg-cream overflow-hidden">
       <div className="container">
-        <h2 className="text-4xl font-serif text-brown-dark text-center mb-12 animate-fade-up">
+        <h2 className="text-4xl font-serif text-brown-dark text-center mb-8 animate-fade-up">
           Our Specialties
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {cakes.map((cake, index) => (
             <Card 
               key={index} 
@@ -56,12 +56,12 @@ const Featured = () => {
           ))}
         </div>
 
-        <div className="mt-16 text-center">
-          <h3 className="text-3xl font-serif text-brown-dark mb-8 animate-fade-up">
+        <div className="mt-8 text-center">
+          <h3 className="text-3xl font-serif text-brown-dark mb-6 animate-fade-up">
             Explore Our Gallery
           </h3>
-          <div className="flex flex-col items-center space-y-6">
-            <div className="grid grid-cols-4 gap-4 max-w-3xl mx-auto mb-8">
+          <div className="flex flex-col items-center space-y-4">
+            <div className="grid grid-cols-4 gap-4 max-w-3xl mx-auto mb-6">
               <img
                 src="/lovable-uploads/fada2d44-e418-4f7e-8555-17ffb22da323.png"
                 alt="Gallery preview 1"
