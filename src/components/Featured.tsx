@@ -76,7 +76,7 @@ const Featured = () => {
         <h3 className="text-3xl font-serif text-brown-dark text-center mb-8 animate-fade-up">
           Recent Creations
         </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {additionalCakes.map((cake, index) => (
             <div 
               key={index} 
