@@ -51,7 +51,7 @@ const Contact = () => {
           <div className="grid gap-6">
             <div className="text-center">
               <p className="text-lg text-brown-light mb-2">
-                96 Almeida St, Indooroopilly, 4068, QLD
+                96 Almeida St, Indooroopilly, QLD, 4068
               </p>
               <p className="text-lg text-brown-light mb-2">
                 Tel: 0467 613 972
