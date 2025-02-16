@@ -1,8 +1,9 @@
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Flavors = () => {
-  const cakeFlavors = [
+  const cakeFlavours = [
     {
       name: "Classic Vanilla",
       description: "Light and airy vanilla chiffon cake layered with house-made raspberry compote",
@@ -53,15 +54,15 @@ const Flavors = () => {
   return (
     <div className="min-h-screen pt-16 bg-cream">
       <div className="container mx-auto px-4 py-12">
-        <h1 className="text-4xl font-serif text-brown-dark mb-8 text-center">Our Flavors</h1>
+        <h1 className="text-4xl font-serif text-brown-dark mb-8 text-center">Our Flavours</h1>
         <p className="text-brown mb-8 text-center max-w-2xl mx-auto">
-          Discover our delicious range of cake flavors, each crafted with premium ingredients and years of expertise. 
-          Whether you prefer classic, fruity, or specialty flavors, we have something to delight every palate.
+          Discover our delicious range of cake flavours, each crafted with premium ingredients and years of expertise. 
+          Whether you prefer classic, fruity, or specialty flavours, we have something to delight every palate.
         </p>
 
         <Tabs defaultValue="all" className="w-full">
           <TabsList className="grid w-full grid-cols-4 max-w-2xl mx-auto">
-            <TabsTrigger value="all">All Flavors</TabsTrigger>
+            <TabsTrigger value="all">All Flavours</TabsTrigger>
             <TabsTrigger value="classic">Classic</TabsTrigger>
             <TabsTrigger value="fruit">Fruit</TabsTrigger>
             <TabsTrigger value="specialty">Specialty</TabsTrigger>
@@ -69,11 +70,11 @@ const Flavors = () => {
 
           <TabsContent value="all" className="mt-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {cakeFlavors.map((flavor) => (
-                <Card key={flavor.name} className="bg-white/80 backdrop-blur hover:shadow-lg transition-shadow">
+              {cakeFlavours.map((flavour) => (
+                <Card key={flavour.name} className="bg-white/80 backdrop-blur hover:shadow-lg transition-shadow">
                   <CardHeader>
-                    <CardTitle className="text-brown-dark">{flavor.name}</CardTitle>
-                    <CardDescription className="text-brown">{flavor.description}</CardDescription>
+                    <CardTitle className="text-brown-dark">{flavour.name}</CardTitle>
+                    <CardDescription className="text-brown">{flavour.description}</CardDescription>
                   </CardHeader>
                 </Card>
               ))}
@@ -83,13 +84,13 @@ const Flavors = () => {
           {["classic", "fruit", "specialty"].map((category) => (
             <TabsContent key={category} value={category} className="mt-8">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {cakeFlavors
-                  .filter((flavor) => flavor.category === category)
-                  .map((flavor) => (
-                    <Card key={flavor.name} className="bg-white/80 backdrop-blur hover:shadow-lg transition-shadow">
+                {cakeFlavours
+                  .filter((flavour) => flavour.category === category)
+                  .map((flavour) => (
+                    <Card key={flavour.name} className="bg-white/80 backdrop-blur hover:shadow-lg transition-shadow">
                       <CardHeader>
-                        <CardTitle className="text-brown-dark">{flavor.name}</CardTitle>
-                        <CardDescription className="text-brown">{flavor.description}</CardDescription>
+                        <CardTitle className="text-brown-dark">{flavour.name}</CardTitle>
+                        <CardDescription className="text-brown">{flavour.description}</CardDescription>
                       </CardHeader>
                     </Card>
                   ))}
