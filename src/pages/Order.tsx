@@ -1,3 +1,4 @@
+
 const Order = () => {
   return (
     <div className="min-h-screen pt-16 bg-cream">
@@ -9,10 +10,10 @@ const Order = () => {
             <h2 className="text-2xl font-serif text-brown-dark mb-4">Getting Started</h2>
             <p className="text-brown mb-6 leading-relaxed">
               Before placing your order, please visit our{" "}
-              <a href="/flavors" className="text-brown-dark underline hover:text-brown">
-                flavors page
+              <a href="/flavours" className="text-brown-dark underline hover:text-brown">
+                flavours page
               </a>{" "}
-              to explore our delicious range of cake flavors.
+              to explore our delicious range of cake flavours.
             </p>
           </div>
 
