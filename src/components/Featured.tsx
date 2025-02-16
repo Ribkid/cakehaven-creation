@@ -1,3 +1,4 @@
+
 import { Card, CardContent } from "./ui/card";
 
 const cakes = [
@@ -20,8 +21,8 @@ const cakes = [
 
 const additionalCakes = [
   {
-    image: "/lovable-uploads/fada2d44-e418-4f7e-8555-17ffb22da323.png",
-    alt: "Custom airplane themed cake",
+    image: "/lovable-uploads/c5f89265-82b9-4843-9248-7d0b47557e6e.png",
+    alt: "Elegant cream cake with gold accents and spiral design",
   },
   {
     image: "/lovable-uploads/8da62372-7190-478c-9f2c-aad64d5b47a0.png",
