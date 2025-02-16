@@ -18,7 +18,7 @@ const FAQ = () => {
     },
     {
       question: "What is your delivery area and cost?",
-      answer: "We offer free delivery to all surrounding suburbs to ensure your cake arrives in perfect condition. Our professional delivery service ensures smooth and uneventful transportation, guaranteeing your cake reaches you exactly as intended. For locations outside our free delivery zone, please contact us for delivery options."
+      answer: "We offer free delivery to most surrounding suburbs to ensure your cake arrives in perfect condition. Our professional delivery service ensures smooth and uneventful transportation, guaranteeing your cake reaches you exactly as intended. For locations outside our free delivery zone, please contact us for delivery options."
     },
     {
       question: "Can you accommodate dietary restrictions?",
