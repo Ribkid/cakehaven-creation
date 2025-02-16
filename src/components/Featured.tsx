@@ -23,7 +23,7 @@ const cakes = [
 
 const Featured = () => {
   return (
-    <section id="featured" className="py-12 bg-cream overflow-hidden">
+    <section id="featured" className="py-8 bg-cream overflow-hidden">
       <div className="container">
         <h2 className="text-4xl font-serif text-brown-dark text-center mb-8 animate-fade-up">
           Our Specialties
