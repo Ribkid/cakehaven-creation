@@ -2,7 +2,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
-const Flavors = () => {
+const Flavours = () => {
   const cakeFlavours = [
     {
       name: "Classic Vanilla",
@@ -103,4 +103,4 @@ const Flavors = () => {
   );
 };
 
-export default Flavors;
+export default Flavours;
