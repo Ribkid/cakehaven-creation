@@ -1,4 +1,3 @@
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Gallery = () => {
@@ -16,6 +15,17 @@ const Gallery = () => {
     { src: "/lovable-uploads/b23d7760-20e9-49ef-b64d-524363c34691.png", alt: "Water Polo Themed Cake", category: "custom" },
     { src: "/lovable-uploads/63346d77-a2f3-4cba-86ef-178d8eef4934.png", alt: "Girl Guides 50th Anniversary Cake", category: "celebration" },
     { src: "/lovable-uploads/8d067daa-47f1-47ea-aee5-4195c89a3848.png", alt: "Fresh Flower Decorated Cake", category: "celebration" },
+    { src: "/lovable-uploads/4ce76a28-f9c7-4fa2-85d3-471ac7089951.png", alt: "Among Us Themed Birthday Cake", category: "birthday" },
+    { src: "/lovable-uploads/bd79691a-d6f0-48e2-8e32-3403506eec21.png", alt: "Peach Frosted Cupcake Collection", category: "custom" },
+    { src: "/lovable-uploads/fd4e5b13-5c3f-4125-86cd-49b2762aad9b.png", alt: "80th Birthday Train Themed Cake", category: "birthday" },
+    { src: "/lovable-uploads/130401eb-2f82-4bd8-93dd-b2466be8cf14.png", alt: "21st Birthday Floral Cake", category: "birthday" },
+    { src: "/lovable-uploads/eb855df0-8364-4a78-94f3-d676b1bf8ddc.png", alt: "70th Birthday Elegant Floral Cake", category: "birthday" },
+    { src: "/lovable-uploads/6a207504-c925-4a3f-8284-9cbe55f2516a.png", alt: "Bob's Birthday Cake with Blue Design", category: "birthday" },
+    { src: "/lovable-uploads/32348c3e-87ae-4506-8692-cdec03ababfe.png", alt: "Sunflower Theme Celebration Cake", category: "celebration" },
+    { src: "/lovable-uploads/d1ad5bbb-09ac-4496-b492-8b369bd16e0d.png", alt: "Nut & Bolt Factory Anniversary Cake", category: "celebration" },
+    { src: "/lovable-uploads/8a5118da-7f18-4b4a-9848-613016fd036c.png", alt: "Gold and Silver Pearl Decorated Cake", category: "celebration" },
+    { src: "/lovable-uploads/4c53d181-5c79-45ff-8e10-13106a0bda15.png", alt: "Gold Dust Celebration Cake", category: "celebration" },
+    { src: "/lovable-uploads/a2c687c1-4994-4124-97de-24729a81db11.png", alt: "Golf Theme Birthday Cake", category: "birthday" },
   ];
 
   return (
