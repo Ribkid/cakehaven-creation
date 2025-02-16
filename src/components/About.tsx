@@ -1,3 +1,4 @@
+
 const About = () => {
   return (
     <section className="py-20 bg-cream">
@@ -22,7 +23,7 @@ const About = () => {
           <div className="relative animate-fade-up" style={{ animationDelay: '300ms' }}>
             <div className="rounded-lg overflow-hidden shadow-xl transform transition-transform duration-300 hover:scale-105">
               <img
-                src="/lovable-uploads/02076538-f58e-4987-b2f5-52505383d566.png"
+                src="/lovable-uploads/a5bc56e9-ec8f-4918-8e42-e884548d1aaf.png"
                 alt="Head baker in chef's whites"
                 className="w-full object-cover rounded-lg"
               />
