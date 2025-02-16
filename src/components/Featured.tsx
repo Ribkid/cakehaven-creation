@@ -5,7 +5,7 @@ const cakes = [
   {
     title: "Custom Birthday Cakes",
     description: "Personalized designs for your special day",
-    image: "/lovable-uploads/3883cdc6-8080-472b-be4f-6722431640d7.png",
+    image: "/lovable-uploads/a66c1bc4-f5d4-448e-8387-076d43f4c8ac.png",
   },
   {
     title: "Theme Cakes",
