@@ -56,7 +56,7 @@ const Featured = () => {
           ))}
         </div>
 
-        <div className="mt-16 text-center">
+        <div className="mt-8 text-center">
           <h3 className="text-3xl font-serif text-brown-dark mb-6 animate-fade-up">
             Explore Our Gallery
           </h3>
