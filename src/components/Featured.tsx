@@ -65,22 +65,22 @@ const Featured = () => {
               <img
                 src="/lovable-uploads/fada2d44-e418-4f7e-8555-17ffb22da323.png"
                 alt="Gallery preview 1"
-                className="w-full h-32 object-cover rounded-lg shadow-md"
+                className="w-full h-40 object-cover rounded-lg shadow-md"
               />
               <img
                 src="/lovable-uploads/8da62372-7190-478c-9f2c-aad64d5b47a0.png"
                 alt="Gallery preview 2"
-                className="w-full h-32 object-cover rounded-lg shadow-md"
+                className="w-full h-40 object-cover rounded-lg shadow-md"
               />
               <img
                 src="/lovable-uploads/31b08536-3836-4802-99df-1a951d0eecc1.png"
                 alt="Gallery preview 3"
-                className="w-full h-32 object-cover rounded-lg shadow-md"
+                className="w-full h-40 object-cover rounded-lg shadow-md"
               />
               <img
                 src="/lovable-uploads/57abade7-1bde-4e03-98cf-327aa9387c9e.png"
                 alt="Gallery preview 4"
-                className="w-full h-32 object-cover rounded-lg shadow-md"
+                className="w-full h-40 object-cover rounded-lg shadow-md"
               />
             </div>
             <Link
