@@ -17,7 +17,7 @@ const cakes = [
   {
     title: "Elegant Celebration Cakes",
     description: "Simple, sophisticated designs with a touch of luxury",
-    image: "/lovable-uploads/42c9cf37-22d3-4633-9508-75b2eea83a93.png",
+    image: "/lovable-uploads/99e42365-08c3-475b-921a-7e5c1e2108eb.png",
   },
 ];
 
