@@ -26,11 +26,11 @@ const Navigation = () => {
               <span>Home</span>
             </Link>
             <Link 
-              to="/flavors" 
+              to="/flavours" 
               className="flex items-center gap-2 text-brown hover:text-brown-dark transition-colors"
             >
               <Droplet className="h-4 w-4" />
-              <span>Flavors</span>
+              <span>Flavours</span>
             </Link>
             <Link 
               to="/pricing" 
