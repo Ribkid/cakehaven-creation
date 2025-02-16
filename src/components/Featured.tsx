@@ -25,7 +25,7 @@ const Featured = () => {
   return (
     <section id="featured" className="py-12 bg-cream overflow-hidden">
       <div className="container">
-        <h2 className="text-4xl font-serif text-brown-dark text-center mb-8 animate-fade-up relative inline-block mx-auto after:content-[''] after:block after:w-full after:h-1 after:bg-brown/20 after:mt-2">
+        <h2 className="text-4xl font-serif text-brown-dark text-center mb-8 animate-fade-up">
           Our Specialties
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
@@ -57,7 +57,7 @@ const Featured = () => {
         </div>
 
         <div className="mt-8 text-center">
-          <h3 className="text-3xl font-serif text-brown-dark mb-6 animate-fade-up relative inline-block after:content-[''] after:block after:w-full after:h-1 after:bg-brown/20 after:mt-2">
+          <h3 className="text-3xl font-serif text-brown-dark mb-6 animate-fade-up">
             Explore Our Gallery
           </h3>
           <div className="flex flex-col items-center space-y-4">
