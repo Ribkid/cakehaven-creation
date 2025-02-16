@@ -10,63 +10,96 @@ const Gallery = () => {
         <Tabs defaultValue="all" className="w-full">
           <TabsList className="w-full justify-center bg-cream border border-brown/20 mb-8">
             <TabsTrigger value="all" className="text-brown">All Cakes</TabsTrigger>
-            <TabsTrigger value="wedding" className="text-brown">Wedding</TabsTrigger>
             <TabsTrigger value="birthday" className="text-brown">Birthday</TabsTrigger>
             <TabsTrigger value="custom" className="text-brown">Custom</TabsTrigger>
+            <TabsTrigger value="celebration" className="text-brown">Celebration</TabsTrigger>
           </TabsList>
 
           <TabsContent value="all" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { src: "https://images.unsplash.com/photo-1621303837174-89787a7d4729", alt: "Wedding Cake", category: "wedding" },
-              { src: "https://images.unsplash.com/photo-1562777717-dc6984f65a63", alt: "Birthday Cake", category: "birthday" },
-              { src: "https://images.unsplash.com/photo-1557308536-ee471ef2c390", alt: "Custom Cake", category: "custom" },
-              { src: "https://images.unsplash.com/photo-1621303837174-89787a7d4729", alt: "Celebration Cake", category: "birthday" },
-              { src: "https://images.unsplash.com/photo-1562777717-dc6984f65a63", alt: "Anniversary Cake", category: "wedding" },
-              { src: "https://images.unsplash.com/photo-1557308536-ee471ef2c390", alt: "Special Cake", category: "custom" },
+              { src: "/lovable-uploads/31a2e79f-957b-4fa6-b50d-203d70e01035.png", alt: "Custom Birthday Cake - Kieren", category: "birthday" },
+              { src: "/lovable-uploads/16439788-f1b3-4ae4-9afe-3100055901d3.png", alt: "Dinosaur Fossil Birthday Cake", category: "birthday" },
+              { src: "/lovable-uploads/b23d7760-20e9-49ef-b64d-524363c34691.png", alt: "Water Polo Themed Cake", category: "custom" },
+              { src: "/lovable-uploads/63346d77-a2f3-4cba-86ef-178d8eef4934.png", alt: "Girl Guides 50th Anniversary Cake", category: "celebration" },
+              { src: "/lovable-uploads/8d067daa-47f1-47ea-aee5-4195c89a3848.png", alt: "Fresh Flower Decorated Cake", category: "celebration" },
             ].map((image, index) => (
               <div 
                 key={index}
                 className="relative group overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
               >
                 <img
-                  src={`${image.src}?w=600&h=400&fit=crop`}
+                  src={image.src}
                   alt={image.alt}
                   className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <p className="text-cream text-lg font-semibold">{image.alt}</p>
+                  <p className="text-cream text-lg font-semibold text-center px-4">{image.alt}</p>
                 </div>
               </div>
             ))}
           </TabsContent>
 
-          {["wedding", "birthday", "custom"].map((category) => (
-            <TabsContent 
-              key={category} 
-              value={category}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-            >
-              {[
-                { src: "https://images.unsplash.com/photo-1621303837174-89787a7d4729", alt: `${category} Cake 1` },
-                { src: "https://images.unsplash.com/photo-1562777717-dc6984f65a63", alt: `${category} Cake 2` },
-                { src: "https://images.unsplash.com/photo-1557308536-ee471ef2c390", alt: `${category} Cake 3` },
-              ].map((image, index) => (
-                <div 
-                  key={index}
-                  className="relative group overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
-                >
-                  <img
-                    src={`${image.src}?w=600&h=400&fit=crop`}
-                    alt={image.alt}
-                    className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <p className="text-cream text-lg font-semibold">{image.alt}</p>
-                  </div>
+          <TabsContent value="birthday" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { src: "/lovable-uploads/31a2e79f-957b-4fa6-b50d-203d70e01035.png", alt: "Custom Birthday Cake - Kieren" },
+              { src: "/lovable-uploads/16439788-f1b3-4ae4-9afe-3100055901d3.png", alt: "Dinosaur Fossil Birthday Cake" },
+            ].map((image, index) => (
+              <div 
+                key={index}
+                className="relative group overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <p className="text-cream text-lg font-semibold text-center px-4">{image.alt}</p>
                 </div>
-              ))}
-            </TabsContent>
-          ))}
+              </div>
+            ))}
+          </TabsContent>
+
+          <TabsContent value="custom" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { src: "/lovable-uploads/b23d7760-20e9-49ef-b64d-524363c34691.png", alt: "Water Polo Themed Cake" },
+            ].map((image, index) => (
+              <div 
+                key={index}
+                className="relative group overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <p className="text-cream text-lg font-semibold text-center px-4">{image.alt}</p>
+                </div>
+              </div>
+            ))}
+          </TabsContent>
+
+          <TabsContent value="celebration" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { src: "/lovable-uploads/63346d77-a2f3-4cba-86ef-178d8eef4934.png", alt: "Girl Guides 50th Anniversary Cake" },
+              { src: "/lovable-uploads/8d067daa-47f1-47ea-aee5-4195c89a3848.png", alt: "Fresh Flower Decorated Cake" },
+            ].map((image, index) => (
+              <div 
+                key={index}
+                className="relative group overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <p className="text-cream text-lg font-semibold text-center px-4">{image.alt}</p>
+                </div>
+              </div>
+            ))}
+          </TabsContent>
         </Tabs>
       </div>
     </div>
