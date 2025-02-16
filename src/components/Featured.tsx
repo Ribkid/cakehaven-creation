@@ -90,7 +90,7 @@ const Featured = () => {
               <img
                 src={cake.image}
                 alt={cake.alt}
-                className="w-full h-80 object-cover transition-transform duration-300 hover:scale-105"
+                className="w-full h-60 object-cover transition-transform duration-300 hover:scale-105"
               />
             </div>
           ))}
