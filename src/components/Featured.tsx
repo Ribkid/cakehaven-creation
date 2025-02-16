@@ -1,3 +1,4 @@
+
 import { Card, CardContent } from "./ui/card";
 
 const cakes = [
@@ -26,6 +27,14 @@ const additionalCakes = [
   {
     image: "/lovable-uploads/8da62372-7190-478c-9f2c-aad64d5b47a0.png",
     alt: "Birthday cake with pink flowers",
+  },
+  {
+    image: "/lovable-uploads/31b08536-3836-4802-99df-1a951d0eecc1.png",
+    alt: "Elegant wedding cake with floral decorations",
+  },
+  {
+    image: "/lovable-uploads/57abade7-1bde-4e03-98cf-327aa9387c9e.png",
+    alt: "Colorful celebration cake with sprinkles",
   }
 ];
 
@@ -67,7 +76,7 @@ const Featured = () => {
         <h3 className="text-3xl font-serif text-brown-dark text-center mb-8 animate-fade-up">
           Recent Creations
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
           {additionalCakes.map((cake, index) => (
             <div 
               key={index} 
