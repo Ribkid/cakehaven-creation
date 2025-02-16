@@ -1,3 +1,4 @@
+
 import {
   Accordion,
   AccordionContent,
@@ -17,7 +18,7 @@ const FAQ = () => {
     },
     {
       question: "What is your delivery area and cost?",
-      answer: "We deliver within a 25-mile radius of our location. Delivery fees start at $25 and may increase based on distance and cake size. Free pickup is also available at our shop."
+      answer: "We offer free delivery to all surrounding suburbs to ensure your cake arrives in perfect condition. Our professional delivery service ensures smooth and uneventful transportation, guaranteeing your cake reaches you exactly as intended. For locations outside our free delivery zone, please contact us for delivery options."
     },
     {
       question: "Can you accommodate dietary restrictions?",
