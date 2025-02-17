@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
+import { track } from '@vercel/analytics';
 
 const Contact = () => {
   const { toast } = useToast();
@@ -20,12 +21,14 @@ const Contact = () => {
       });
 
       if (response.ok) {
+        track('Contact Form Submit', { status: 'success' });
         toast({
           title: "Message sent!",
           description: "Thank you for contacting us. We'll get back to you soon.",
         });
         form.reset();
       } else {
+        track('Contact Form Submit', { status: 'error' });
         toast({
           variant: "destructive",
           title: "Error",
@@ -33,6 +36,7 @@ const Contact = () => {
         });
       }
     } catch (error) {
+      track('Contact Form Submit', { status: 'error', error: error.message });
       toast({
         variant: "destructive",
         title: "Error",
@@ -89,7 +93,11 @@ const Contact = () => {
                 />
               </div>
               
-              <Button type="submit" className="w-full">
+              <Button 
+                type="submit" 
+                className="w-full"
+                onClick={() => track('Contact Form Button Click')}
+              >
                 Send Message
               </Button>
             </form>

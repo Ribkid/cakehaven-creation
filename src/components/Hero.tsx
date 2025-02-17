@@ -1,6 +1,13 @@
+
 import { Button } from "./ui/button";
+import { track } from '@vercel/analytics';
 
 const Hero = () => {
+  const handleOrderClick = () => {
+    track('Hero CTA Click', { button: 'Order Your Cake' });
+    window.location.href = '/order';
+  };
+
   return (
     <div className="relative min-h-screen flex items-center bg-cream">
       {/* Left side content */}
@@ -17,7 +24,7 @@ const Hero = () => {
         </p>
         <Button
           className="bg-brown hover:bg-brown-dark text-cream text-lg px-8 py-6 self-start"
-          onClick={() => window.location.href = '/order'}
+          onClick={handleOrderClick}
         >
           Order Your Cake
         </Button>
