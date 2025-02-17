@@ -19,7 +19,7 @@ const Pricing = () => {
           size: "8-inch Round",
           servings: "Serves 24 people",
           prices: {
-            basic: 120,
+            basic: 90,
             advanced: 150
           },
           note: "Ideal for medium-sized celebrations"
@@ -42,7 +42,7 @@ const Pricing = () => {
           size: "Quarter Sheet",
           servings: "Serves 20 people",
           prices: {
-            basic: 110,
+            basic: 90,
             advanced: 140
           },
           note: "Great for office parties"
@@ -51,7 +51,7 @@ const Pricing = () => {
           size: "Half Sheet",
           servings: "Serves 50 people",
           prices: {
-            basic: 150,
+            basic: 90,
             advanced: 180
           },
           note: "Perfect for larger gatherings"
@@ -60,7 +60,7 @@ const Pricing = () => {
           size: "Full Sheet",
           servings: "Serves 90 people",
           prices: {
-            basic: 200,
+            basic: 90,
             advanced: 230
           },
           note: "Ideal for big events and weddings"
@@ -74,7 +74,7 @@ const Pricing = () => {
           size: "Dozen (12) Cupcakes",
           servings: "12 individual servings",
           prices: {
-            basic: 50,
+            basic: 90,
             advanced: 75
           },
           note: "Perfect for any occasion"
