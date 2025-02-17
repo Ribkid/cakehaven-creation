@@ -16,6 +16,7 @@ import Pricing from "./pages/Pricing";
 import Gallery from "./pages/Gallery";
 import SparkleEffect from "./components/SparkleEffect";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import * as React from 'react';
 
 function App() {
@@ -31,10 +32,10 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <SparkleEffect />
-        <Toaster />
-        <Sonner />
         <BrowserRouter>
+          <SparkleEffect />
+          <Toaster />
+          <Sonner />
           <Navigation />
           <Routes>
             <Route path="/" element={<Index />} />
@@ -47,8 +48,9 @@ function App() {
             <Route path="/auth" element={<Auth />} />
             <Route path="/pricing" element={<Pricing />} />
           </Routes>
+          <SpeedInsights />
+          <Analytics />
         </BrowserRouter>
-        <Analytics />
       </TooltipProvider>
     </QueryClientProvider>
   );
