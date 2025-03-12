@@ -12,7 +12,7 @@ const features = [
   { 
     step: 'Step 2',
     title: 'Discuss With Us',
-    content: 'We'll talk through your ideas and preferences for your perfect cake.',
+    content: "We'll talk through your ideas and preferences for your perfect cake.",
     image: '/lovable-uploads/31a2e79f-957b-4fa6-b50d-203d70e01035.png'
   },
   { 
