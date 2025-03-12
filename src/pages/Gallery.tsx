@@ -1,6 +1,12 @@
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { X } from "lucide-react";
 
 const Gallery = () => {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
   const allCakes = [
     { src: "/lovable-uploads/46f0c743-b2db-495a-b89e-c3aebe67c208.png", alt: "Construction Themed Birthday Cake - Oliver", category: "birthday" },
     { src: "/lovable-uploads/72059ea2-4e6a-4f36-83ba-3328dd2b2e08.png", alt: "Cookies and Cream Drip Cake", category: "celebration" },
@@ -28,81 +34,161 @@ const Gallery = () => {
     { src: "/lovable-uploads/a2c687c1-4994-4124-97de-24729a81db11.png", alt: "Golf Theme Birthday Cake", category: "birthday" },
   ];
 
+  const container = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: { 
+      opacity: 1, 
+      scale: 1,
+      transition: { duration: 0.3 }
+    }
+  };
+
   return (
-    <div className="min-h-screen pt-24 bg-cream">
-      <div className="container mx-auto px-4">
-        <h1 className="text-4xl font-cursive text-brown-dark mb-8 text-center">Our Cake Gallery</h1>
+    <div className="min-h-screen pt-24 bg-gradient-to-b from-cream to-white">
+      <div className="container mx-auto px-4 pb-16">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-12"
+        >
+          <h1 className="text-5xl font-cursive text-brown-dark mb-4">Our Cake Gallery</h1>
+          <div className="w-24 h-1 bg-gradient-to-r from-brown to-brown-light mx-auto mb-6"></div>
+          <p className="text-brown max-w-2xl mx-auto text-lg">
+            Browse our collection of custom-designed cakes, each one crafted with care and creativity.
+            From birthday celebrations to special events, we bring your cake dreams to life.
+          </p>
+        </motion.div>
         
         <Tabs defaultValue="all" className="w-full">
-          <TabsList className="w-full justify-center bg-cream border border-brown/20 mb-8">
-            <TabsTrigger value="all" className="text-brown">All Cakes</TabsTrigger>
-            <TabsTrigger value="birthday" className="text-brown">Birthday</TabsTrigger>
-            <TabsTrigger value="custom" className="text-brown">Custom</TabsTrigger>
-            <TabsTrigger value="celebration" className="text-brown">Celebration</TabsTrigger>
-          </TabsList>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <TabsList className="w-full justify-center bg-cream/50 border border-brown/10 mb-12 rounded-full p-1">
+              <TabsTrigger value="all" className="text-brown data-[state=active]:bg-white rounded-full data-[state=active]:text-brown-dark transition-all duration-300">All Cakes</TabsTrigger>
+              <TabsTrigger value="birthday" className="text-brown data-[state=active]:bg-white rounded-full data-[state=active]:text-brown-dark transition-all duration-300">Birthday</TabsTrigger>
+              <TabsTrigger value="custom" className="text-brown data-[state=active]:bg-white rounded-full data-[state=active]:text-brown-dark transition-all duration-300">Custom</TabsTrigger>
+              <TabsTrigger value="celebration" className="text-brown data-[state=active]:bg-white rounded-full data-[state=active]:text-brown-dark transition-all duration-300">Celebration</TabsTrigger>
+            </TabsList>
+          </motion.div>
 
-          <TabsContent value="all" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {allCakes.map((image, index) => (
-              <div 
-                key={index}
-                className="relative group overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
-              >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+          <TabsContent value="all">
+            <motion.div 
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+              variants={container}
+              initial="hidden"
+              animate="visible"
+            >
+              {allCakes.map((image, index) => (
+                <GalleryItem 
+                  key={index}
+                  image={image}
+                  setSelectedImage={setSelectedImage}
+                  variants={item}
                 />
-              </div>
-            ))}
+              ))}
+            </motion.div>
           </TabsContent>
 
-          <TabsContent value="birthday" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {allCakes.filter(cake => cake.category === "birthday").map((image, index) => (
-              <div 
-                key={index}
-                className="relative group overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+          {["birthday", "custom", "celebration"].map((category) => (
+            <TabsContent key={category} value={category}>
+              <motion.div 
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+                variants={container}
+                initial="hidden"
+                animate="visible"
               >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-              </div>
-            ))}
-          </TabsContent>
-
-          <TabsContent value="custom" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {allCakes.filter(cake => cake.category === "custom").map((image, index) => (
-              <div 
-                key={index}
-                className="relative group overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
-              >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-              </div>
-            ))}
-          </TabsContent>
-
-          <TabsContent value="celebration" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {allCakes.filter(cake => cake.category === "celebration").map((image, index) => (
-              <div 
-                key={index}
-                className="relative group overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
-              >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-              </div>
-            ))}
-          </TabsContent>
+                {allCakes
+                  .filter(cake => cake.category === category)
+                  .map((image, index) => (
+                    <GalleryItem 
+                      key={index}
+                      image={image}
+                      setSelectedImage={setSelectedImage}
+                      variants={item}
+                    />
+                  ))}
+              </motion.div>
+            </TabsContent>
+          ))}
         </Tabs>
       </div>
+
+      {/* Lightbox */}
+      {selectedImage && (
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/80 z-50 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={() => setSelectedImage(null)}
+        >
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: "spring", damping: 25 }}
+            className="relative max-w-4xl max-h-[90vh] w-full bg-white p-2 rounded-lg shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button 
+              className="absolute -top-4 -right-4 bg-brown-dark text-white p-2 rounded-full hover:bg-brown transition-colors"
+              onClick={() => setSelectedImage(null)}
+            >
+              <X size={18} />
+            </button>
+            <img
+              src={selectedImage}
+              alt="Selected cake"
+              className="w-full h-full object-contain rounded-md"
+            />
+          </motion.div>
+        </motion.div>
+      )}
     </div>
+  );
+};
+
+interface GalleryItemProps {
+  image: {
+    src: string;
+    alt: string;
+    category: string;
+  };
+  setSelectedImage: (src: string) => void;
+  variants: any;
+}
+
+const GalleryItem = ({ image, setSelectedImage, variants }: GalleryItemProps) => {
+  return (
+    <motion.div 
+      variants={variants}
+      className="relative group overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 bg-white h-64"
+      onClick={() => setSelectedImage(image.src)}
+    >
+      <div className="absolute inset-0 bg-gradient-to-t from-brown-dark/70 via-transparent to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+        <h3 className="text-white font-medium text-sm">{image.alt}</h3>
+        <span className="text-cream/80 text-xs capitalize">
+          {image.category} Cake
+        </span>
+      </div>
+      <img
+        src={image.src}
+        alt={image.alt}
+        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+      />
+    </motion.div>
   );
 };
 
