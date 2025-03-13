@@ -50,7 +50,7 @@ function CreativePricing({
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {tiers.map((tier, index) => (
                     <div
                         key={tier.name}
@@ -58,8 +58,7 @@ function CreativePricing({
                             "relative group",
                             "transition-all duration-300",
                             index === 0 && "rotate-[-1deg]",
-                            index === 1 && "rotate-[1deg]",
-                            index === 2 && "rotate-[-2deg]"
+                            index === 1 && "rotate-[1deg]"
                         )}
                     >
                         <div
@@ -110,7 +109,7 @@ function CreativePricing({
                                 </span>
                                 {typeof tier.price === 'number' && (
                                     <span className="text-zinc-600 dark:text-zinc-400">
-                                        
+                                        +
                                     </span>
                                 )}
                             </div>
@@ -158,7 +157,7 @@ function CreativePricing({
                                           ]
                                 )}
                             >
-                                Get Started
+                                Order Now
                             </Button>
                         </div>
                     </div>
