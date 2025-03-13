@@ -4,12 +4,13 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { track } from '@vercel/analytics';
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MessageSquare } from "lucide-react";
 import { useState } from "react";
 
 const Contact = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const whatsappNumber = "0467613972";
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -54,13 +55,39 @@ const Contact = () => {
     }
   };
 
+  const handleWhatsAppClick = () => {
+    track('WhatsApp Contact Click');
+    window.open(`https://wa.me/${whatsappNumber}`, '_blank');
+  };
+
   return (
     <div className="min-h-screen pt-16 bg-cream">
       <div className="container mx-auto px-4 py-12">
         <h1 className="text-4xl font-serif text-brown-dark mb-8 text-center">Complete Your Cake Order</h1>
-        <p className="text-brown mb-8 text-center max-w-2xl mx-auto">
-          Please fill out the form below to place your custom cake order. We'll get back to you with details and confirmation.
-        </p>
+        
+        <div className="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md mb-10">
+          <h2 className="text-2xl font-serif text-brown-dark mb-6 text-center">Choose How to Order</h2>
+          
+          <div className="grid md:grid-cols-2 gap-6 mb-8">
+            <div className="bg-cream p-6 rounded-lg text-center flex flex-col items-center">
+              <h3 className="text-xl font-medium text-brown-dark mb-3">Contact via WhatsApp</h3>
+              <p className="text-brown-light mb-4">Message me directly on WhatsApp to discuss your cake order</p>
+              <p className="font-medium text-brown mb-4">{whatsappNumber}</p>
+              <Button 
+                onClick={handleWhatsAppClick}
+                className="bg-green-600 hover:bg-green-700 mt-auto"
+              >
+                <MessageSquare className="mr-2 h-5 w-5" />
+                WhatsApp Me
+              </Button>
+            </div>
+            
+            <div className="bg-cream p-6 rounded-lg text-center">
+              <h3 className="text-xl font-medium text-brown-dark mb-3">Fill Out the Form Below</h3>
+              <p className="text-brown-light mb-4">Complete the order form and I'll get back to you soon</p>
+            </div>
+          </div>
+        </div>
         
         <form onSubmit={handleSubmit} className="max-w-xl mx-auto space-y-6 bg-white p-8 rounded-lg shadow-md">
           <div className="space-y-2">
