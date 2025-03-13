@@ -2,6 +2,8 @@
 import { Button } from "@/components/ui/button";
 import { Check, Pencil, Star, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useNavigate } from "react-router-dom";
+import { track } from '@vercel/analytics';
 
 interface PricingTier {
     name: string;
@@ -24,6 +26,13 @@ function CreativePricing({
     description?: string;
     tiers: PricingTier[];
 }) {
+    const navigate = useNavigate();
+
+    const handleOrderClick = () => {
+        track('Pricing CTA Click', { button: 'Order Now' });
+        navigate('/order');
+    };
+
     return (
         <div className="w-full max-w-6xl mx-auto px-4">
             <div className="text-center space-y-6 mb-16">
@@ -156,6 +165,7 @@ function CreativePricing({
                                               "active:bg-zinc-50 dark:active:bg-zinc-800",
                                           ]
                                 )}
+                                onClick={handleOrderClick}
                             >
                                 Order Now
                             </Button>

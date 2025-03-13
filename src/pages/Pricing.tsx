@@ -1,7 +1,7 @@
 
 import { CreativePricing } from "@/components/ui/creative-pricing";
 import type { PricingTier } from "@/components/ui/creative-pricing";
-import { Pencil, Star, Cake, Sparkles } from "lucide-react";
+import { Cake, Star } from "lucide-react";
 
 const pricingTiers: PricingTier[] = [
   {
@@ -39,14 +39,19 @@ const pricingTiers: PricingTier[] = [
 
 const Pricing = () => {
   return (
-    <div className="container mx-auto py-12">
-      <CreativePricing 
-        tag="Cake Pricing Guide"
-        title="Sweet Celebrations"
-        description="Choose the perfect cake package for your special occasion"
-        tiers={pricingTiers} 
-      />
-    </div>
+    <section id="pricing" className="py-16 bg-cream">
+      <div className="container mx-auto">
+        <h2 className="text-4xl font-serif text-brown-dark text-center mb-8 animate-fade-up">
+          Our Pricing
+        </h2>
+        <CreativePricing 
+          tag="Cake Pricing Guide"
+          title="Sweet Celebrations"
+          description="Choose the perfect cake package for your special occasion"
+          tiers={pricingTiers} 
+        />
+      </div>
+    </section>
   );
 };
 
