@@ -1,5 +1,7 @@
 
-import { PricingCard } from "@/components/ui/pricing-card";
+import { CreativePricing } from "@/components/ui/creative-pricing";
+import type { PricingTier } from "@/components/ui/creative-pricing";
+import { Pencil, Star, Sparkles } from "lucide-react";
 
 interface CakeSize {
   size: string;
@@ -50,32 +52,41 @@ const cakeSizes: CakeSize[] = [
   }
 ];
 
-// Convert cake sizes to pricing tiers format
-const pricingTiers = cakeSizes.map((cake) => ({
-  name: cake.size,
-  description: cake.servings,
-  price: cake.prices.basic,
-  features: [
-    `Basic design for $${typeof cake.prices.basic === 'number' ? cake.prices.basic : 'Custom pricing'}`,
-    `Advanced design for $${typeof cake.prices.advanced === 'number' ? cake.prices.advanced : 'Custom pricing'}`,
-    cake.note
-  ],
-  cta: "Perfect for " + cake.note.toLowerCase().replace("perfect for ", "").replace("ideal for ", "").replace("great for ", ""),
-  highlighted: cake.size === "8 inch round" // Set 8 inch as highlighted option
-}));
+// Convert cake sizes to creative pricing tiers format
+const pricingTiers: PricingTier[] = cakeSizes.map((cake, index) => {
+  const icons = [
+    <Pencil key="pencil" className="w-6 h-6" />,
+    <Star key="star" className="w-6 h-6" />,
+    <Sparkles key="sparkles" className="w-6 h-6" />,
+    <Sparkles key="sparkles-large" className="w-6 h-6" />
+  ];
+  
+  const colors = ["amber", "purple", "amber", "purple"];
+  
+  return {
+    name: cake.size,
+    icon: icons[index],
+    price: cake.prices.basic,
+    description: cake.servings,
+    color: colors[index],
+    features: [
+      `Basic design for ${typeof cake.prices.basic === 'number' ? `$${cake.prices.basic}` : cake.prices.basic}`,
+      `Advanced design for ${typeof cake.prices.advanced === 'number' ? `$${cake.prices.advanced}` : cake.prices.advanced}`,
+      cake.note
+    ],
+    popular: cake.size === "8 inch round" // Set 8 inch as most popular option
+  };
+});
 
 const Pricing = () => {
   return (
     <div className="container mx-auto py-12">
-      <h1 className="text-3xl font-bold text-center mb-4">Cake Pricing Guide</h1>
-      <p className="text-center text-muted-foreground mb-8">
-        Choose the perfect cake size for your occasion
-      </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {pricingTiers.map((tier, index) => (
-          <PricingCard key={index} tier={tier} />
-        ))}
-      </div>
+      <CreativePricing 
+        tag="Cake Pricing Guide"
+        title="Sweet Celebrations"
+        description="Choose the perfect cake size for your special occasion"
+        tiers={pricingTiers} 
+      />
     </div>
   );
 };
