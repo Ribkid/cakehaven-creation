@@ -5,12 +5,16 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { track } from '@vercel/analytics';
 import { ArrowRight } from "lucide-react";
+import { useState } from "react";
 
 const Contact = () => {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    
     try {
       const form = e.currentTarget;
       track('Order Form Submit', { status: 'initiated' });
@@ -45,6 +49,8 @@ const Contact = () => {
         title: "Error",
         description: "There was a problem submitting your order. Please try again.",
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -147,8 +153,9 @@ const Contact = () => {
             type="submit" 
             className="w-full bg-brown hover:bg-brown-dark text-cream"
             onClick={() => track('Order Form Button Click')}
+            disabled={isSubmitting}
           >
-            Submit Order
+            {isSubmitting ? "Submitting..." : "Submit Order"}
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </form>
