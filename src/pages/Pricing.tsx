@@ -41,7 +41,7 @@ const Pricing = () => {
   return (
     <section id="pricing" className="py-16 bg-cream">
       <div className="container mx-auto">
-        <h2 className="text-4xl font-serif text-brown-dark text-center mb-8 animate-fade-up">
+        <h2 className="cake-title text-center mb-8 animate-fade-up">
           Our Pricing
         </h2>
         <CreativePricing 

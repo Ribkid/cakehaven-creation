@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -97,5 +98,23 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-cursive;
+  }
+}
+
+@layer components {
+  .cake-title {
+    @apply font-cursive text-3xl md:text-4xl text-brown-dark;
+  }
+  
+  .cake-subtitle {
+    @apply font-cursive text-xl md:text-2xl text-brown;
+  }
+  
+  .cake-text {
+    @apply font-cursive text-lg text-brown-light;
   }
 }

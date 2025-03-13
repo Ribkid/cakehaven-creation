@@ -20,6 +20,7 @@ export default {
     extend: {
       fontFamily: {
         cursive: ["Dancing Script", "cursive"],
+        serif: ["Dancing Script", "cursive"],
       },
       colors: {
         cream: "#FDF5E6",

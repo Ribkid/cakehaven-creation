@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -63,19 +62,19 @@ const Contact = () => {
   return (
     <div className="min-h-screen pt-16 bg-cream">
       <div className="container mx-auto px-4 py-12">
-        <h1 className="text-4xl font-serif text-brown-dark mb-8 text-center">Complete Your Cake Order</h1>
+        <h1 className="cake-title mb-8 text-center">Complete Your Cake Order</h1>
         
         <div className="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md mb-10">
-          <h2 className="text-2xl font-serif text-brown-dark mb-6 text-center">Choose How to Order</h2>
+          <h2 className="cake-subtitle mb-6 text-center">Choose How to Order</h2>
           
           <div className="grid md:grid-cols-2 gap-6 mb-8">
             <div className="bg-cream p-6 rounded-lg text-center flex flex-col items-center">
-              <h3 className="text-xl font-medium text-brown-dark mb-3">Contact via WhatsApp</h3>
-              <p className="text-brown-light mb-4">Message me directly on WhatsApp to discuss your cake order</p>
-              <p className="font-medium text-brown mb-4">{whatsappNumber}</p>
+              <h3 className="text-xl font-cursive text-brown-dark mb-3">Contact via WhatsApp</h3>
+              <p className="cake-text mb-4">Message me directly on WhatsApp to discuss your cake order</p>
+              <p className="font-cursive text-brown mb-4">{whatsappNumber}</p>
               <Button 
                 onClick={handleWhatsAppClick}
-                className="bg-green-600 hover:bg-green-700 mt-auto"
+                className="bg-green-600 hover:bg-green-700 mt-auto font-cursive"
               >
                 <MessageSquare className="mr-2 h-5 w-5" />
                 WhatsApp Me
@@ -83,15 +82,15 @@ const Contact = () => {
             </div>
             
             <div className="bg-cream p-6 rounded-lg text-center">
-              <h3 className="text-xl font-medium text-brown-dark mb-3">Fill Out the Form Below</h3>
-              <p className="text-brown-light mb-4">Complete the order form and I'll get back to you soon</p>
+              <h3 className="text-xl font-cursive text-brown-dark mb-3">Fill Out the Form Below</h3>
+              <p className="cake-text mb-4">Complete the order form and I'll get back to you soon</p>
             </div>
           </div>
         </div>
         
         <form onSubmit={handleSubmit} className="max-w-xl mx-auto space-y-6 bg-white p-8 rounded-lg shadow-md">
           <div className="space-y-2">
-            <label htmlFor="name" className="text-sm font-medium text-brown-dark">
+            <label htmlFor="name" className="text-sm font-cursive text-brown-dark">
               Your Name
             </label>
             <Input
@@ -105,7 +104,7 @@ const Contact = () => {
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="email" className="text-sm font-medium text-brown-dark">
+            <label htmlFor="email" className="text-sm font-cursive text-brown-dark">
               Your Email
             </label>
             <Input
@@ -119,7 +118,7 @@ const Contact = () => {
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="phone" className="text-sm font-medium text-brown-dark">
+            <label htmlFor="phone" className="text-sm font-cursive text-brown-dark">
               Phone Number
             </label>
             <Input
@@ -133,14 +132,14 @@ const Contact = () => {
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="cakeType" className="text-sm font-medium text-brown-dark">
+            <label htmlFor="cakeType" className="text-sm font-cursive text-brown-dark">
               Cake Package
             </label>
             <select
               id="cakeType"
               name="cakeType"
               required
-              className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background"
+              className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background font-cursive"
             >
               <option value="">Select a package</option>
               <option value="Basic Package - 6 inch">Basic Package - 6" ($90)</option>
@@ -151,7 +150,7 @@ const Contact = () => {
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="date" className="text-sm font-medium text-brown-dark">
+            <label htmlFor="date" className="text-sm font-cursive text-brown-dark">
               Desired Delivery Date
             </label>
             <Input
@@ -164,7 +163,7 @@ const Contact = () => {
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="message" className="text-sm font-medium text-brown-dark">
+            <label htmlFor="message" className="text-sm font-cursive text-brown-dark">
               Special Requirements
             </label>
             <Textarea
@@ -178,7 +177,7 @@ const Contact = () => {
 
           <Button 
             type="submit" 
-            className="w-full bg-brown hover:bg-brown-dark text-cream"
+            className="w-full bg-brown hover:bg-brown-dark text-cream font-cursive"
             onClick={() => track('Order Form Button Click')}
             disabled={isSubmitting}
           >
