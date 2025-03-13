@@ -1,5 +1,5 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+
+import { PricingCard } from "@/components/ui/pricing-card";
 
 interface CakeSize {
   size: string;
@@ -34,7 +34,7 @@ const cakeSizes: CakeSize[] = [
     size: "9 inch round",
     servings: "Serves 20-25",
     prices: {
-      basic: 90,
+      basic: 90, 
       advanced: 160
     },
     note: "Great for medium-sized events"
@@ -50,37 +50,30 @@ const cakeSizes: CakeSize[] = [
   }
 ];
 
+// Convert cake sizes to pricing tiers format
+const pricingTiers = cakeSizes.map((cake) => ({
+  name: cake.size,
+  description: cake.servings,
+  price: cake.prices.basic,
+  features: [
+    `Basic design for $${typeof cake.prices.basic === 'number' ? cake.prices.basic : 'Custom pricing'}`,
+    `Advanced design for $${typeof cake.prices.advanced === 'number' ? cake.prices.advanced : 'Custom pricing'}`,
+    cake.note
+  ],
+  cta: "Perfect for " + cake.note.toLowerCase().replace("perfect for ", "").replace("ideal for ", "").replace("great for ", ""),
+  highlighted: cake.size === "8 inch round" // Set 8 inch as highlighted option
+}));
+
 const Pricing = () => {
   return (
     <div className="container mx-auto py-12">
-      <h1 className="text-3xl font-bold text-center mb-8">Cake Pricing Guide</h1>
+      <h1 className="text-3xl font-bold text-center mb-4">Cake Pricing Guide</h1>
+      <p className="text-center text-muted-foreground mb-8">
+        Choose the perfect cake size for your occasion
+      </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {cakeSizes.map((cake, index) => (
-          <Card key={index}>
-            <CardHeader>
-              <CardTitle>{cake.size}</CardTitle>
-              <CardDescription>{cake.servings}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span>Basic Design:</span>
-                  <span>
-                    {typeof cake.prices.basic === 'number' ? `$${cake.prices.basic}` : cake.prices.basic}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Advanced Design:</span>
-                  <span>
-                    {typeof cake.prices.advanced === 'number' ? `$${cake.prices.advanced}` : cake.prices.advanced}
-                  </span>
-                </div>
-              </div>
-            </CardContent>
-            <CardFooter>
-              <Badge>{cake.note}</Badge>
-            </CardFooter>
-          </Card>
+        {pricingTiers.map((tier, index) => (
+          <PricingCard key={index} tier={tier} />
         ))}
       </div>
     </div>
