@@ -1,13 +1,15 @@
-
 import { Button } from "./ui/button";
 import { track } from '@vercel/analytics';
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
+
   const handleOrderClick = () => {
     track('Hero CTA Click', { button: 'Order Your Cake' });
-    window.location.href = '/order';
+    navigate('/order');
   };
 
   return (

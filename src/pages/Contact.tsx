@@ -1,7 +1,10 @@
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
+import { track } from '@vercel/analytics';
+import { ArrowRight } from "lucide-react";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -10,6 +13,8 @@ const Contact = () => {
     e.preventDefault();
     try {
       const form = e.currentTarget;
+      track('Order Form Submit', { status: 'initiated' });
+      
       const response = await fetch("https://formspree.io/f/xyzkjdjn", {
         method: "POST",
         body: new FormData(form),
@@ -19,12 +24,14 @@ const Contact = () => {
       });
 
       if (response.ok) {
+        track('Order Form Submit', { status: 'success' });
         toast({
           title: "Order submitted!",
           description: "Thank you for your cake order. We'll get back to you soon.",
         });
         form.reset();
       } else {
+        track('Order Form Submit', { status: 'error' });
         toast({
           variant: "destructive",
           title: "Error",
@@ -32,6 +39,7 @@ const Contact = () => {
         });
       }
     } catch (error) {
+      track('Order Form Submit', { status: 'error' });
       toast({
         variant: "destructive",
         title: "Error",
@@ -43,12 +51,12 @@ const Contact = () => {
   return (
     <div className="min-h-screen pt-16 bg-cream">
       <div className="container mx-auto px-4 py-12">
-        <h1 className="text-4xl font-serif text-brown-dark mb-8">Order Your Custom Cake</h1>
-        <p className="text-brown mb-8">
+        <h1 className="text-4xl font-serif text-brown-dark mb-8 text-center">Complete Your Cake Order</h1>
+        <p className="text-brown mb-8 text-center max-w-2xl mx-auto">
           Please fill out the form below to place your custom cake order. We'll get back to you with details and confirmation.
         </p>
         
-        <form onSubmit={handleSubmit} className="max-w-xl space-y-6">
+        <form onSubmit={handleSubmit} className="max-w-xl mx-auto space-y-6 bg-white p-8 rounded-lg shadow-md">
           <div className="space-y-2">
             <label htmlFor="name" className="text-sm font-medium text-brown-dark">
               Your Name
@@ -93,30 +101,20 @@ const Contact = () => {
 
           <div className="space-y-2">
             <label htmlFor="cakeType" className="text-sm font-medium text-brown-dark">
-              Type of Cake
+              Cake Package
             </label>
-            <Input
-              type="text"
+            <select
               id="cakeType"
               name="cakeType"
               required
-              className="w-full"
-              placeholder="e.g., Birthday, Wedding, Custom Theme"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <label htmlFor="servings" className="text-sm font-medium text-brown-dark">
-              Number of Servings
-            </label>
-            <Input
-              type="number"
-              id="servings"
-              name="servings"
-              required
-              className="w-full"
-              placeholder="Estimated number of servings needed"
-            />
+              className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background"
+            >
+              <option value="">Select a package</option>
+              <option value="Basic Package - 6 inch">Basic Package - 6" ($90)</option>
+              <option value="Basic Package - 8 inch">Basic Package - 8" ($120)</option>
+              <option value="Premium Package - 6 inch">Premium Package - 6" ($110)</option>
+              <option value="Premium Package - 8 inch">Premium Package - 8" ($150)</option>
+            </select>
           </div>
 
           <div className="space-y-2">
@@ -145,8 +143,13 @@ const Contact = () => {
             />
           </div>
 
-          <Button type="submit" className="w-full">
+          <Button 
+            type="submit" 
+            className="w-full bg-brown hover:bg-brown-dark text-cream"
+            onClick={() => track('Order Form Button Click')}
+          >
             Submit Order
+            <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </form>
       </div>
