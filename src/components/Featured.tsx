@@ -2,6 +2,7 @@
 import { Card, CardContent } from "./ui/card";
 import { Link } from "react-router-dom";
 import { Image } from "lucide-react";
+import CakeCarousel from "./CakeCarousel";
 
 const cakes = [
   {
@@ -25,7 +26,12 @@ const Featured = () => {
   return (
     <section id="featured" className="py-16 bg-cream overflow-hidden">
       <div className="container">
-        <h2 className="text-4xl font-serif text-brown-dark text-center mb-8 animate-fade-up">
+        {/* New Carousel Section */}
+        <CakeCarousel />
+        
+        <div className="w-full max-w-4xl mx-auto h-px bg-gradient-to-r from-transparent via-brown/20 to-transparent my-16"></div>
+        
+        <h2 className="text-4xl font-cursive text-brown-dark text-center mb-8 animate-fade-up">
           Our Specialties
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
@@ -46,7 +52,7 @@ const Featured = () => {
                   className="w-full h-64 object-cover transition-transform duration-300 hover:scale-105"
                 />
                 <div className="p-6">
-                  <h3 className="text-2xl font-serif text-brown-dark mb-2">
+                  <h3 className="text-2xl font-cursive text-brown-dark mb-2">
                     {cake.title}
                   </h3>
                   <p className="text-brown-light">{cake.description}</p>
@@ -57,7 +63,7 @@ const Featured = () => {
         </div>
 
         <div className="mt-16 text-center">
-          <h3 className="text-3xl font-serif text-brown-dark mb-6 animate-fade-up">
+          <h3 className="text-3xl font-cursive text-brown-dark mb-6 animate-fade-up">
             Explore Our Gallery
           </h3>
           <div className="flex flex-col items-center space-y-4">
