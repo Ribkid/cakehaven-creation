@@ -13,7 +13,10 @@ import {
   Calendar, 
   Users, 
   Search,
-  Star,
+  Circle,
+  Square,
+  Heart,
+  CakeSlice,
   CheckCircle
 } from "lucide-react";
 
@@ -42,6 +45,9 @@ const personalInfoSchema = z.object({
 });
 
 const cakeDetailsSchema = z.object({
+  cakeShape: z.enum(["circle", "square", "number", "heart"], {
+    required_error: "Please select a cake shape",
+  }),
   cakeSize: z.enum(["6", "8", "10", "12"], {
     required_error: "Please select a cake size",
   }),
@@ -63,7 +69,7 @@ const Order = () => {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const totalSteps = 2;
+  const totalSteps = 3; // Now we have 3 steps: personal info, cake shape/details, and cake size/flavor
   
   // Calculate progress percentage
   const progressPercentage = (step / totalSteps) * 100;
@@ -75,6 +81,7 @@ const Order = () => {
       name: "",
       email: "",
       phone: "",
+      cakeShape: "circle",
       cakeSize: "8",
       guests: "",
       flavor: "",
@@ -85,11 +92,18 @@ const Order = () => {
 
   // Navigation functions
   const nextStep = async () => {
-    let schemaToValidate = step === 1 ? personalInfoSchema : cakeDetailsSchema;
-    let fieldsToValidate = step === 1 ? ["name", "email", "phone"] : ["cakeSize", "guests", "flavor", "date", "message"];
+    let fieldsToValidate: any[] = [];
+    
+    if (step === 1) {
+      fieldsToValidate = ["name", "email", "phone"];
+    } else if (step === 2) {
+      fieldsToValidate = ["cakeShape"];
+    } else {
+      fieldsToValidate = ["cakeSize", "guests", "flavor", "date", "message"];
+    }
     
     // Trigger validation only for the current step's fields
-    const result = await form.trigger(fieldsToValidate as any);
+    const result = await form.trigger(fieldsToValidate);
     
     if (result) {
       setStep(step + 1);
@@ -116,6 +130,7 @@ const Order = () => {
       formData.append("name", data.name);
       formData.append("email", data.email);
       formData.append("phone", data.phone);
+      formData.append("cakeShape", data.cakeShape);
       formData.append("cakeSize", data.cakeSize);
       formData.append("guests", String(data.guests));
       formData.append("flavor", data.flavor);
@@ -191,7 +206,8 @@ const Order = () => {
             <Progress value={progressPercentage} className="h-2 mb-2" />
             <div className="flex justify-between text-xs text-brown font-cursive">
               <span className={cn(step === 1 ? "font-bold" : "")}>Your Details</span>
-              <span className={cn(step === 2 ? "font-bold" : "")}>Cake Details</span>
+              <span className={cn(step === 2 ? "font-bold" : "")}>Cake Shape</span>
+              <span className={cn(step === 3 ? "font-bold" : "")}>Cake Details</span>
             </div>
           </div>
         </div>
@@ -275,7 +291,124 @@ const Order = () => {
 
               {step === 2 && (
                 <div className="space-y-6 animate-fade-in">
-                  <h2 className="text-2xl font-cursive text-brown-dark text-center mb-6">Step 2: Cake Details</h2>
+                  <h2 className="text-2xl font-cursive text-brown-dark text-center mb-6">Step 2: Choose Your Cake Shape</h2>
+                  
+                  <FormField
+                    control={form.control}
+                    name="cakeShape"
+                    render={({ field }) => (
+                      <FormItem className="space-y-3">
+                        <FormLabel className="font-cursive text-brown-dark">Cake Shape</FormLabel>
+                        <FormControl>
+                          <RadioGroup
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                            className="grid grid-cols-2 gap-4"
+                          >
+                            <div className="col-span-1">
+                              <RadioGroupItem
+                                value="circle"
+                                id="shape-circle"
+                                className="peer sr-only"
+                              />
+                              <label
+                                htmlFor="shape-circle"
+                                className={cn(
+                                  "flex flex-col items-center justify-center rounded-md border-2 border-muted p-4 hover:border-brown hover:bg-cream/50 cursor-pointer transition-all",
+                                  field.value === "circle" ? "border-brown bg-cream/50" : ""
+                                )}
+                              >
+                                <Circle className={cn("h-20 w-20 mb-2", field.value === "circle" ? "text-brown" : "text-gray-400")} />
+                                <span className="font-cursive text-center">Circle Cake</span>
+                              </label>
+                            </div>
+
+                            <div className="col-span-1">
+                              <RadioGroupItem
+                                value="square"
+                                id="shape-square"
+                                className="peer sr-only"
+                              />
+                              <label
+                                htmlFor="shape-square"
+                                className={cn(
+                                  "flex flex-col items-center justify-center rounded-md border-2 border-muted p-4 hover:border-brown hover:bg-cream/50 cursor-pointer transition-all",
+                                  field.value === "square" ? "border-brown bg-cream/50" : ""
+                                )}
+                              >
+                                <Square className={cn("h-20 w-20 mb-2", field.value === "square" ? "text-brown" : "text-gray-400")} />
+                                <span className="font-cursive text-center">Slab Cake</span>
+                              </label>
+                            </div>
+
+                            <div className="col-span-1">
+                              <RadioGroupItem
+                                value="number"
+                                id="shape-number"
+                                className="peer sr-only"
+                              />
+                              <label
+                                htmlFor="shape-number"
+                                className={cn(
+                                  "flex flex-col items-center justify-center rounded-md border-2 border-muted p-4 hover:border-brown hover:bg-cream/50 cursor-pointer transition-all",
+                                  field.value === "number" ? "border-brown bg-cream/50" : ""
+                                )}
+                              >
+                                <div className={cn("h-20 w-20 mb-2 flex items-center justify-center text-4xl font-bold", field.value === "number" ? "text-brown" : "text-gray-400")}>
+                                  123
+                                </div>
+                                <span className="font-cursive text-center">Number Cake</span>
+                              </label>
+                            </div>
+
+                            <div className="col-span-1">
+                              <RadioGroupItem
+                                value="heart"
+                                id="shape-heart"
+                                className="peer sr-only"
+                              />
+                              <label
+                                htmlFor="shape-heart"
+                                className={cn(
+                                  "flex flex-col items-center justify-center rounded-md border-2 border-muted p-4 hover:border-brown hover:bg-cream/50 cursor-pointer transition-all",
+                                  field.value === "heart" ? "border-brown bg-cream/50" : ""
+                                )}
+                              >
+                                <Heart className={cn("h-20 w-20 mb-2", field.value === "heart" ? "text-brown" : "text-gray-400")} />
+                                <span className="font-cursive text-center">Heart Cake</span>
+                              </label>
+                            </div>
+                          </RadioGroup>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <div className="flex gap-4 pt-4">
+                    <Button 
+                      type="button" 
+                      onClick={prevStep}
+                      className="w-1/3 bg-gray-300 hover:bg-gray-400 text-gray-800 font-cursive"
+                    >
+                      <ArrowLeft className="mr-2 h-5 w-5" />
+                      Back
+                    </Button>
+                    <Button 
+                      type="button" 
+                      onClick={nextStep}
+                      className="w-2/3 bg-brown hover:bg-brown-dark text-cream font-cursive"
+                    >
+                      Continue
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Button>
+                  </div>
+                </div>
+              )}
+
+              {step === 3 && (
+                <div className="space-y-6 animate-fade-in">
+                  <h2 className="text-2xl font-cursive text-brown-dark text-center mb-6">Step 3: Cake Details</h2>
                   
                   <FormField
                     control={form.control}
@@ -468,3 +601,4 @@ const Order = () => {
 };
 
 export default Order;
+
