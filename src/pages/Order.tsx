@@ -1,20 +1,181 @@
 
-import { FeatureStepsDemo } from "@/components/FeatureStepsDemo";
-import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
-import { track } from '@vercel/analytics';
-import { ArrowRight, Search } from "lucide-react";
 import { useState } from "react";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { format } from "date-fns";
+import { track } from '@vercel/analytics';
+import { useToast } from "@/components/ui/use-toast";
+import { useNavigate } from "react-router-dom";
+import { 
+  ArrowRight, 
+  ArrowLeft, 
+  Calendar, 
+  Users, 
+  Search,
+  Star,
+  CheckCircle
+} from "lucide-react";
+
+// UI Components
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Progress } from "@/components/ui/progress";
+import { 
+  Popover, 
+  PopoverContent, 
+  PopoverTrigger 
+} from "@/components/ui/popover";
+import { Calendar as CalendarComponent } from "@/components/ui/calendar";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { cn } from "@/lib/utils";
+import CakeSizeSelector from "@/components/CakeSizeSelector";
+import OrderTestimonials from "@/components/OrderTestimonials";
+
+// Define step validation schemas
+const personalInfoSchema = z.object({
+  name: z.string().min(2, { message: "Name must be at least 2 characters" }),
+  email: z.string().email({ message: "Please enter a valid email address" }),
+  phone: z.string().min(8, { message: "Please enter a valid phone number" }),
+});
+
+const cakeDetailsSchema = z.object({
+  cakeSize: z.enum(["6", "8", "10", "12"], {
+    required_error: "Please select a cake size",
+  }),
+  guests: z.string().min(1, { message: "Please enter number of guests" }).transform(Number),
+  flavor: z.string().min(1, { message: "Please select a cake flavor" }),
+  date: z.date({
+    required_error: "Please select a delivery date",
+  }),
+  message: z.string().min(10, { message: "Please provide details about your order" }),
+});
+
+// Combined schema for the whole form
+const orderFormSchema = personalInfoSchema.merge(cakeDetailsSchema);
+type OrderFormValues = z.infer<typeof orderFormSchema>;
 
 const Order = () => {
+  const { toast } = useToast();
   const navigate = useNavigate();
+  const [step, setStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const totalSteps = 2;
+  
+  // Calculate progress percentage
+  const progressPercentage = (step / totalSteps) * 100;
 
-  const handleNextClick = () => {
-    track('Order Flow', { action: 'Next Button Click' });
-    navigate("/contact");
+  // Form with validation
+  const form = useForm<OrderFormValues>({
+    resolver: zodResolver(orderFormSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      cakeSize: "8",
+      guests: "",
+      flavor: "",
+      message: "",
+    },
+    mode: "onChange", // Enable real-time validation
+  });
+
+  // Navigation functions
+  const nextStep = async () => {
+    let schemaToValidate = step === 1 ? personalInfoSchema : cakeDetailsSchema;
+    let fieldsToValidate = step === 1 ? ["name", "email", "phone"] : ["cakeSize", "guests", "flavor", "date", "message"];
+    
+    // Trigger validation only for the current step's fields
+    const result = await form.trigger(fieldsToValidate as any);
+    
+    if (result) {
+      setStep(step + 1);
+      track('Order Flow', { action: 'Next Step', step: step + 1 });
+      window.scrollTo(0, 0);
+    }
   };
+
+  const prevStep = () => {
+    setStep(step - 1);
+    track('Order Flow', { action: 'Previous Step', step: step - 1 });
+    window.scrollTo(0, 0);
+  };
+
+  // Form submission
+  const handleSubmit = async (data: OrderFormValues) => {
+    setIsSubmitting(true);
+    
+    try {
+      track('Order Form Submit', { status: 'initiated' });
+      
+      // Create form data
+      const formData = new FormData();
+      formData.append("name", data.name);
+      formData.append("email", data.email);
+      formData.append("phone", data.phone);
+      formData.append("cakeSize", data.cakeSize);
+      formData.append("guests", String(data.guests));
+      formData.append("flavor", data.flavor);
+      formData.append("date", format(data.date, "yyyy-MM-dd"));
+      formData.append("message", data.message);
+      
+      const response = await fetch("https://formspree.io/f/xyzkjdjn", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        track('Order Form Submit', { status: 'success' });
+        toast({
+          title: "Order submitted!",
+          description: "Thank you for your cake order. We'll get back to you soon.",
+        });
+        form.reset();
+        setStep(1);
+      } else {
+        track('Order Form Submit', { status: 'error' });
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: "There was a problem submitting your order. Please try again.",
+        });
+      }
+    } catch (error) {
+      track('Order Form Submit', { status: 'error' });
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "There was a problem submitting your order. Please try again.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // Available cake flavors
+  const cakeFlavors = [
+    "Vanilla",
+    "Chocolate",
+    "Red Velvet",
+    "Carrot",
+    "Lemon",
+    "Marble",
+    "Funfetti",
+    "Strawberry",
+    "Coconut",
+    "Coffee"
+  ];
+
+  // Filter flavors based on search
+  const filteredFlavors = cakeFlavors.filter(flavor => 
+    flavor.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="min-h-screen pt-16 bg-cream">
@@ -22,65 +183,284 @@ const Order = () => {
         <h1 className="text-4xl font-cursive text-brown-dark mb-4 text-center">
           Order Your Dream Cake
         </h1>
-        <p className="text-center mb-8 text-brown font-cursive max-w-xl mx-auto">
-          Creating your perfect cake is a simple process. Follow the steps below and we'll bring your vision to life!
-        </p>
         
-        <div className="max-w-md mx-auto mb-10">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-            <Input
-              type="text"
-              placeholder="Search for cake styles, flavors, or occasions..."
-              className="pl-10 font-cursive"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
+        {/* Progress Indicator */}
+        <div className="max-w-2xl mx-auto mb-8">
+          <div className="bg-white p-4 rounded-lg shadow-md">
+            <p className="text-brown mb-2 text-center font-cursive">Order Progress</p>
+            <Progress value={progressPercentage} className="h-2 mb-2" />
+            <div className="flex justify-between text-xs text-brown font-cursive">
+              <span className={cn(step === 1 ? "font-bold" : "")}>Your Details</span>
+              <span className={cn(step === 2 ? "font-bold" : "")}>Cake Details</span>
+            </div>
           </div>
         </div>
         
-        <div className="max-w-5xl mx-auto">
-          <FeatureStepsDemo />
-          
-          <div className="mt-12 bg-white rounded-lg shadow-md p-8 max-w-3xl mx-auto">
-            <h2 className="text-3xl font-cursive text-brown-dark mb-6 text-center">Why Choose Our Custom Cakes?</h2>
-            
-            <div className="grid md:grid-cols-2 gap-8 mb-8">
-              <div>
-                <h3 className="text-xl font-cursive text-brown-dark mb-3">Premium Quality</h3>
-                <p className="text-brown font-cursive">We use only the finest ingredients to ensure your cake not only looks amazing but tastes delicious too.</p>
-              </div>
-              
-              <div>
-                <h3 className="text-xl font-cursive text-brown-dark mb-3">Custom Designs</h3>
-                <p className="text-brown font-cursive">Every cake is made to your specifications, ensuring a unique creation for your special occasion.</p>
-              </div>
-              
-              <div>
-                <h3 className="text-xl font-cursive text-brown-dark mb-3">Free Delivery</h3>
-                <p className="text-brown font-cursive">We offer free delivery to local areas to ensure your cake arrives in perfect condition.</p>
-              </div>
-              
-              <div>
-                <h3 className="text-xl font-cursive text-brown-dark mb-3">Personalized Service</h3>
-                <p className="text-brown font-cursive">From concept to creation, we work closely with you to bring your cake dreams to life.</p>
-              </div>
+        {/* Order Form */}
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(handleSubmit)} className="max-w-2xl mx-auto">
+            <div className="bg-white p-8 rounded-lg shadow-md mb-8">
+              {step === 1 && (
+                <div className="space-y-6 animate-fade-in">
+                  <h2 className="text-2xl font-cursive text-brown-dark text-center mb-6">Step 1: Your Details</h2>
+                  
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="font-cursive text-brown-dark">Your Name</FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            placeholder="Enter your full name"
+                            className="font-cursive"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="font-cursive text-brown-dark">Your Email</FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            type="email"
+                            placeholder="your@email.com"
+                            className="font-cursive"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="phone"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="font-cursive text-brown-dark">Phone Number</FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            type="tel"
+                            placeholder="Your phone number"
+                            className="font-cursive"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <div className="flex justify-end pt-4">
+                    <Button 
+                      type="button" 
+                      onClick={nextStep}
+                      className="bg-brown hover:bg-brown-dark text-cream font-cursive"
+                    >
+                      Continue
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Button>
+                  </div>
+                </div>
+              )}
+
+              {step === 2 && (
+                <div className="space-y-6 animate-fade-in">
+                  <h2 className="text-2xl font-cursive text-brown-dark text-center mb-6">Step 2: Cake Details</h2>
+                  
+                  <FormField
+                    control={form.control}
+                    name="cakeSize"
+                    render={({ field }) => (
+                      <FormItem className="space-y-3">
+                        <FormLabel className="font-cursive text-brown-dark">Cake Size</FormLabel>
+                        <FormControl>
+                          <CakeSizeSelector 
+                            value={field.value} 
+                            onChange={field.onChange}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="guests"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="font-cursive text-brown-dark">Number of Guests</FormLabel>
+                        <FormControl>
+                          <div className="relative">
+                            <Users className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+                            <Input
+                              {...field}
+                              type="number"
+                              min="1"
+                              placeholder="How many guests are you expecting?"
+                              className="pl-10 font-cursive"
+                            />
+                          </div>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="flavor"
+                    render={({ field }) => (
+                      <FormItem className="space-y-3">
+                        <FormLabel className="font-cursive text-brown-dark">Cake Flavor</FormLabel>
+                        <FormControl>
+                          <div className="space-y-2">
+                            <div className="relative mb-3">
+                              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+                              <Input
+                                type="text"
+                                placeholder="Search for flavors..."
+                                className="pl-10 font-cursive"
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                              />
+                            </div>
+                            
+                            <RadioGroup
+                              onValueChange={field.onChange}
+                              defaultValue={field.value}
+                              className="grid grid-cols-2 gap-2 sm:grid-cols-3"
+                            >
+                              {filteredFlavors.map((flavor) => (
+                                <div key={flavor}>
+                                  <RadioGroupItem
+                                    value={flavor}
+                                    id={`flavor-${flavor}`}
+                                    className="peer sr-only"
+                                  />
+                                  <label
+                                    htmlFor={`flavor-${flavor}`}
+                                    className={cn(
+                                      "flex items-center justify-center rounded-md border-2 border-muted bg-popover p-3 hover:bg-accent hover:text-accent-foreground font-cursive cursor-pointer transition-all",
+                                      field.value === flavor ? "border-primary bg-primary/10" : ""
+                                    )}
+                                  >
+                                    {flavor}
+                                    {field.value === flavor && <CheckCircle className="ml-2 h-4 w-4" />}
+                                  </label>
+                                </div>
+                              ))}
+                            </RadioGroup>
+                          </div>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="date"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-col">
+                        <FormLabel className="font-cursive text-brown-dark">Desired Delivery Date</FormLabel>
+                        <Popover>
+                          <PopoverTrigger asChild>
+                            <FormControl>
+                              <Button
+                                variant={"outline"}
+                                className={cn(
+                                  "w-full pl-3 text-left font-cursive",
+                                  !field.value && "text-muted-foreground"
+                                )}
+                              >
+                                {field.value ? (
+                                  format(field.value, "PPP")
+                                ) : (
+                                  <span>Pick a date</span>
+                                )}
+                                <Calendar className="ml-auto h-4 w-4 opacity-50" />
+                              </Button>
+                            </FormControl>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-auto p-0" align="start">
+                            <CalendarComponent
+                              mode="single"
+                              selected={field.value}
+                              onSelect={field.onChange}
+                              disabled={(date) =>
+                                date < new Date(new Date().setDate(new Date().getDate() + 2))
+                              }
+                              initialFocus
+                              className="pointer-events-auto"
+                            />
+                          </PopoverContent>
+                        </Popover>
+                        <p className="text-xs text-muted-foreground font-cursive">
+                          Please select a date at least 2 days from today
+                        </p>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="font-cursive text-brown-dark">Special Requirements</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            {...field}
+                            className="min-h-[150px] w-full font-cursive"
+                            placeholder="Please describe your cake requirements, including design preferences and any dietary restrictions..."
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <div className="flex gap-4 pt-4">
+                    <Button 
+                      type="button" 
+                      onClick={prevStep}
+                      className="w-1/3 bg-gray-300 hover:bg-gray-400 text-gray-800 font-cursive"
+                    >
+                      <ArrowLeft className="mr-2 h-5 w-5" />
+                      Back
+                    </Button>
+                    <Button 
+                      type="submit" 
+                      className="w-2/3 bg-brown hover:bg-brown-dark text-cream font-cursive"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? "Submitting..." : "Submit Order"}
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Button>
+                  </div>
+                </div>
+              )}
             </div>
-          
-            <div className="text-center">
-              <Button
-                onClick={handleNextClick}
-                className="bg-brown hover:bg-brown-dark text-cream text-lg px-8 py-6 rounded-full group shadow-lg hover:shadow-xl transition-all duration-300 font-cursive"
-              >
-                Start Your Cake Order Now
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-              </Button>
-            </div>
-          </div>
-          
-          <div className="mt-12 text-center text-brown font-cursive">
-            <p>Have questions before ordering? Check our <a href="/faq" className="text-brown-dark underline">FAQ page</a> or contact us directly.</p>
-          </div>
+          </form>
+        </Form>
+        
+        {/* Testimonials Section */}
+        <OrderTestimonials />
+        
+        <div className="mt-12 text-center text-brown font-cursive">
+          <p>Have questions before ordering? Check our <a href="/faq" className="text-brown-dark underline">FAQ page</a> or contact us directly.</p>
         </div>
       </div>
     </div>
