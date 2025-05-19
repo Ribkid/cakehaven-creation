@@ -40,15 +40,15 @@ const CakeSizeSelector: React.FC<CakeSizeSelectorProps> = ({ value, onChange }) 
               height: `${parseInt(sizeOption.size) * 8}px` 
             }}
           >
-            <span className="text-xs font-cursive">{sizeOption.label}</span>
+            <span className="text-xs font-cursive font-bold text-gray-800">{sizeOption.label}</span>
           </div>
-          <span className="font-cursive text-brown-dark font-bold">
+          <span className="font-cursive text-brown-dark font-bold text-base">
             {sizeOption.label}
           </span>
-          <span className="text-xs text-gray-500 font-cursive">
+          <span className="text-sm text-gray-700 font-cursive">
             {sizeOption.diameter}
           </span>
-          <span className="text-xs text-gray-500 font-cursive">
+          <span className="text-sm text-gray-700 font-cursive">
             {sizeOption.serves}
           </span>
         </button>

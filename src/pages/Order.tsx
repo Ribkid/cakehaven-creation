@@ -92,7 +92,7 @@ const Order = () => {
 
   // Navigation functions
   const nextStep = async () => {
-    let fieldsToValidate: any[] = [];
+    let fieldsToValidate: string[] = [];
     
     if (step === 1) {
       fieldsToValidate = ["name", "email", "phone"];
@@ -103,7 +103,7 @@ const Order = () => {
     }
     
     // Trigger validation only for the current step's fields
-    const result = await form.trigger(fieldsToValidate);
+    const result = await form.trigger(fieldsToValidate as any);
     
     if (result) {
       setStep(step + 1);
@@ -225,15 +225,15 @@ const Order = () => {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="font-cursive text-brown-dark">Your Name</FormLabel>
+                        <FormLabel className="font-cursive text-brown-dark text-base md:text-lg">Your Name</FormLabel>
                         <FormControl>
                           <Input
                             {...field}
                             placeholder="Enter your full name"
-                            className="font-cursive"
+                            className="font-cursive text-base text-gray-800"
                           />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-sm md:text-base" />
                       </FormItem>
                     )}
                   />
@@ -243,16 +243,16 @@ const Order = () => {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="font-cursive text-brown-dark">Your Email</FormLabel>
+                        <FormLabel className="font-cursive text-brown-dark text-base md:text-lg">Your Email</FormLabel>
                         <FormControl>
                           <Input
                             {...field}
                             type="email"
                             placeholder="your@email.com"
-                            className="font-cursive"
+                            className="font-cursive text-base text-gray-800"
                           />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-sm md:text-base" />
                       </FormItem>
                     )}
                   />
@@ -262,16 +262,16 @@ const Order = () => {
                     name="phone"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="font-cursive text-brown-dark">Phone Number</FormLabel>
+                        <FormLabel className="font-cursive text-brown-dark text-base md:text-lg">Phone Number</FormLabel>
                         <FormControl>
                           <Input
                             {...field}
                             type="tel"
                             placeholder="Your phone number"
-                            className="font-cursive"
+                            className="font-cursive text-base text-gray-800"
                           />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-sm md:text-base" />
                       </FormItem>
                     )}
                   />
@@ -280,7 +280,7 @@ const Order = () => {
                     <Button 
                       type="button" 
                       onClick={nextStep}
-                      className="bg-brown hover:bg-brown-dark text-cream font-cursive"
+                      className="bg-brown hover:bg-brown-dark text-cream font-cursive text-base"
                     >
                       Continue
                       <ArrowRight className="ml-2 h-5 w-5" />
@@ -298,7 +298,7 @@ const Order = () => {
                     name="cakeShape"
                     render={({ field }) => (
                       <FormItem className="space-y-3">
-                        <FormLabel className="font-cursive text-brown-dark">Cake Shape</FormLabel>
+                        <FormLabel className="font-cursive text-brown-dark text-base md:text-lg">Cake Shape</FormLabel>
                         <FormControl>
                           <RadioGroup
                             onValueChange={field.onChange}
@@ -319,7 +319,7 @@ const Order = () => {
                                 )}
                               >
                                 <Circle className={cn("h-20 w-20 mb-2", field.value === "circle" ? "text-brown" : "text-gray-400")} />
-                                <span className="font-cursive text-center">Circle Cake</span>
+                                <span className="font-cursive text-center text-base text-gray-800">Circle Cake</span>
                               </label>
                             </div>
 
@@ -337,7 +337,7 @@ const Order = () => {
                                 )}
                               >
                                 <Square className={cn("h-20 w-20 mb-2", field.value === "square" ? "text-brown" : "text-gray-400")} />
-                                <span className="font-cursive text-center">Slab Cake</span>
+                                <span className="font-cursive text-center text-base text-gray-800">Slab Cake</span>
                               </label>
                             </div>
 
@@ -357,7 +357,7 @@ const Order = () => {
                                 <div className={cn("h-20 w-20 mb-2 flex items-center justify-center text-4xl font-bold", field.value === "number" ? "text-brown" : "text-gray-400")}>
                                   123
                                 </div>
-                                <span className="font-cursive text-center">Number Cake</span>
+                                <span className="font-cursive text-center text-base text-gray-800">Number Cake</span>
                               </label>
                             </div>
 
@@ -375,12 +375,12 @@ const Order = () => {
                                 )}
                               >
                                 <Heart className={cn("h-20 w-20 mb-2", field.value === "heart" ? "text-brown" : "text-gray-400")} />
-                                <span className="font-cursive text-center">Heart Cake</span>
+                                <span className="font-cursive text-center text-base text-gray-800">Heart Cake</span>
                               </label>
                             </div>
                           </RadioGroup>
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-sm md:text-base" />
                       </FormItem>
                     )}
                   />
@@ -389,7 +389,7 @@ const Order = () => {
                     <Button 
                       type="button" 
                       onClick={prevStep}
-                      className="w-1/3 bg-gray-300 hover:bg-gray-400 text-gray-800 font-cursive"
+                      className="w-1/3 bg-gray-300 hover:bg-gray-400 text-gray-800 font-cursive text-base"
                     >
                       <ArrowLeft className="mr-2 h-5 w-5" />
                       Back
@@ -397,7 +397,7 @@ const Order = () => {
                     <Button 
                       type="button" 
                       onClick={nextStep}
-                      className="w-2/3 bg-brown hover:bg-brown-dark text-cream font-cursive"
+                      className="w-2/3 bg-brown hover:bg-brown-dark text-cream font-cursive text-base"
                     >
                       Continue
                       <ArrowRight className="ml-2 h-5 w-5" />
@@ -415,14 +415,14 @@ const Order = () => {
                     name="cakeSize"
                     render={({ field }) => (
                       <FormItem className="space-y-3">
-                        <FormLabel className="font-cursive text-brown-dark">Cake Size</FormLabel>
+                        <FormLabel className="font-cursive text-brown-dark text-base md:text-lg">Cake Size</FormLabel>
                         <FormControl>
                           <CakeSizeSelector 
                             value={field.value} 
                             onChange={field.onChange}
                           />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-sm md:text-base" />
                       </FormItem>
                     )}
                   />
@@ -432,7 +432,7 @@ const Order = () => {
                     name="guests"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="font-cursive text-brown-dark">Number of Guests</FormLabel>
+                        <FormLabel className="font-cursive text-brown-dark text-base md:text-lg">Number of Guests</FormLabel>
                         <FormControl>
                           <div className="relative">
                             <Users className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
@@ -441,11 +441,11 @@ const Order = () => {
                               type="number"
                               min="1"
                               placeholder="How many guests are you expecting?"
-                              className="pl-10 font-cursive"
+                              className="pl-10 font-cursive text-base text-gray-800"
                             />
                           </div>
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-sm md:text-base" />
                       </FormItem>
                     )}
                   />
@@ -455,7 +455,7 @@ const Order = () => {
                     name="flavor"
                     render={({ field }) => (
                       <FormItem className="space-y-3">
-                        <FormLabel className="font-cursive text-brown-dark">Cake Flavor</FormLabel>
+                        <FormLabel className="font-cursive text-brown-dark text-base md:text-lg">Cake Flavor</FormLabel>
                         <FormControl>
                           <div className="space-y-2">
                             <div className="relative mb-3">
@@ -463,7 +463,7 @@ const Order = () => {
                               <Input
                                 type="text"
                                 placeholder="Search for flavors..."
-                                className="pl-10 font-cursive"
+                                className="pl-10 font-cursive text-base text-gray-800"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                               />
@@ -484,7 +484,7 @@ const Order = () => {
                                   <label
                                     htmlFor={`flavor-${flavor}`}
                                     className={cn(
-                                      "flex items-center justify-center rounded-md border-2 border-muted bg-popover p-3 hover:bg-accent hover:text-accent-foreground font-cursive cursor-pointer transition-all",
+                                      "flex items-center justify-center rounded-md border-2 border-muted bg-popover p-3 hover:bg-accent hover:text-accent-foreground font-cursive cursor-pointer transition-all text-base text-gray-800",
                                       field.value === flavor ? "border-primary bg-primary/10" : ""
                                     )}
                                   >
@@ -496,7 +496,7 @@ const Order = () => {
                             </RadioGroup>
                           </div>
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-sm md:text-base" />
                       </FormItem>
                     )}
                   />
@@ -506,15 +506,16 @@ const Order = () => {
                     name="date"
                     render={({ field }) => (
                       <FormItem className="flex flex-col">
-                        <FormLabel className="font-cursive text-brown-dark">Desired Delivery Date</FormLabel>
+                        <FormLabel className="font-cursive text-brown-dark text-base md:text-lg">Desired Delivery Date</FormLabel>
                         <Popover>
                           <PopoverTrigger asChild>
                             <FormControl>
                               <Button
                                 variant={"outline"}
                                 className={cn(
-                                  "w-full pl-3 text-left font-cursive",
-                                  !field.value && "text-muted-foreground"
+                                  "w-full pl-3 text-left font-cursive text-base",
+                                  !field.value && "text-muted-foreground",
+                                  field.value && "text-gray-800"
                                 )}
                               >
                                 {field.value ? (
@@ -542,7 +543,7 @@ const Order = () => {
                         <p className="text-xs text-muted-foreground font-cursive">
                           Please select a date at least 2 days from today
                         </p>
-                        <FormMessage />
+                        <FormMessage className="text-sm md:text-base" />
                       </FormItem>
                     )}
                   />
@@ -552,15 +553,15 @@ const Order = () => {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="font-cursive text-brown-dark">Special Requirements</FormLabel>
+                        <FormLabel className="font-cursive text-brown-dark text-base md:text-lg">Special Requirements</FormLabel>
                         <FormControl>
                           <Textarea
                             {...field}
-                            className="min-h-[150px] w-full font-cursive"
+                            className="min-h-[150px] w-full font-cursive text-base text-gray-800"
                             placeholder="Please describe your cake requirements, including design preferences and any dietary restrictions..."
                           />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-sm md:text-base" />
                       </FormItem>
                     )}
                   />
@@ -569,14 +570,14 @@ const Order = () => {
                     <Button 
                       type="button" 
                       onClick={prevStep}
-                      className="w-1/3 bg-gray-300 hover:bg-gray-400 text-gray-800 font-cursive"
+                      className="w-1/3 bg-gray-300 hover:bg-gray-400 text-gray-800 font-cursive text-base"
                     >
                       <ArrowLeft className="mr-2 h-5 w-5" />
                       Back
                     </Button>
                     <Button 
                       type="submit" 
-                      className="w-2/3 bg-brown hover:bg-brown-dark text-cream font-cursive"
+                      className="w-2/3 bg-brown hover:bg-brown-dark text-cream font-cursive text-base"
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? "Submitting..." : "Submit Order"}
@@ -592,7 +593,7 @@ const Order = () => {
         {/* Testimonials Section */}
         <OrderTestimonials />
         
-        <div className="mt-12 text-center text-brown font-cursive">
+        <div className="mt-12 text-center text-brown font-cursive text-lg">
           <p>Have questions before ordering? Check our <a href="/faq" className="text-brown-dark underline">FAQ page</a> or contact us directly.</p>
         </div>
       </div>
@@ -601,4 +602,3 @@ const Order = () => {
 };
 
 export default Order;
-
