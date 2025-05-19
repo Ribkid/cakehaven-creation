@@ -31,11 +31,11 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <BrowserRouter>
-          <SparkleEffect />
-          <Toaster />
-          <Sonner />
+      <BrowserRouter>
+        <SparkleEffect />
+        <Toaster />
+        <Sonner />
+        <TooltipProvider>
           <Navigation />
           <Routes>
             <Route path="/" element={<Index />} />
@@ -48,10 +48,10 @@ function App() {
             <Route path="/auth" element={<Auth />} />
             <Route path="/pricing" element={<Pricing />} />
           </Routes>
-          <SpeedInsights />
-          <Analytics />
-        </BrowserRouter>
-      </TooltipProvider>
+        </TooltipProvider>
+        <SpeedInsights />
+        <Analytics />
+      </BrowserRouter>
     </QueryClientProvider>
   );
 }
