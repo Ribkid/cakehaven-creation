@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -50,7 +51,7 @@ const cakeDetailsSchema = z.object({
   cakeSize: z.enum(["6", "8", "10", "12"], {
     required_error: "Please select a cake size",
   }),
-  guests: z.string().min(1, { message: "Please enter number of guests" }).transform(Number),
+  guests: z.coerce.number().min(1, { message: "Please enter number of guests" }),
   flavor: z.string().min(1, { message: "Please select a cake flavor" }),
   date: z.date({
     required_error: "Please select a delivery date",
@@ -82,7 +83,7 @@ const Order = () => {
       phone: "",
       cakeShape: "circle",
       cakeSize: "8",
-      guests: "",
+      guests: undefined, // Changed from empty string to undefined
       flavor: "",
       message: "",
     },
@@ -91,7 +92,7 @@ const Order = () => {
 
   // Navigation functions
   const nextStep = async () => {
-    let fieldsToValidate: string[] = [];
+    let fieldsToValidate: (keyof OrderFormValues)[] = []; // Fixed type
     
     if (step === 1) {
       fieldsToValidate = ["name", "email", "phone"];
