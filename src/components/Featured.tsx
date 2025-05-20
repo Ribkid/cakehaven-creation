@@ -23,29 +23,6 @@ const cakes = [
   },
 ];
 
-const testimonials = [
-  {
-    name: "Sarah M.",
-    comment: "The cake was absolutely stunning and delicious! Everyone at my daughter's birthday party was impressed. Will definitely order again!",
-    rating: 5,
-  },
-  {
-    name: "Michael P.",
-    comment: "Our wedding cake was perfect - exactly what we envisioned. The tasting session was wonderful and helped us choose the perfect flavor combination.",
-    rating: 5,
-  },
-  {
-    name: "Emma T.",
-    comment: "The attention to detail on my son's dinosaur cake was amazing. He was so excited when he saw it, and it tasted even better than it looked!",
-    rating: 5,
-  },
-  {
-    name: "David L.",
-    comment: "Ordered a last-minute birthday cake and they came through beautifully. Great customer service and an absolutely delicious cake.",
-    rating: 4,
-  },
-];
-
 const Featured = () => {
   return (
     <section id="featured" className="py-16 bg-cream overflow-hidden">
@@ -86,43 +63,7 @@ const Featured = () => {
           ))}
         </div>
 
-        {/* Testimonials Section */}
-        <div className="mt-20 mb-16">
-          <h2 className="text-4xl font-cursive text-brown-dark text-center mb-2 animate-fade-up">
-            What Our Customers Say
-          </h2>
-          <p className="text-center text-brown mb-10 font-cursive max-w-xl mx-auto">
-            We take pride in creating cakes that not only look amazing but taste delicious too. Here's what some of our happy customers have to say.
-          </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {testimonials.map((testimonial, index) => (
-              <div 
-                key={index} 
-                className="bg-white p-6 rounded-lg shadow-md border border-brown/10"
-                style={{ 
-                  animationDelay: `${index * 200}ms`,
-                  animation: 'fade-up 0.5s ease-out forwards',
-                  opacity: 0 
-                }}
-              >
-                <div className="flex mb-3">
-                  {[...Array(5)].map((_, i) => (
-                    <Star 
-                      key={i} 
-                      className={cn(
-                        "w-5 h-5", 
-                        i < testimonial.rating ? "text-gold fill-gold" : "text-gray-300"
-                      )} 
-                    />
-                  ))}
-                </div>
-                <p className="text-brown mb-4 italic font-cursive">"{testimonial.comment}"</p>
-                <p className="text-brown-dark font-cursive">- {testimonial.name}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* Testimonials Section removed - now using Elfsight widget in OrderTestimonials */}
 
         <div className="mt-16 text-center">
           <h3 className="text-3xl font-cursive text-brown-dark mb-6 animate-fade-up">
