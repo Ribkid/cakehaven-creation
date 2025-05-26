@@ -8,6 +8,19 @@ const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const allCakes = [
+    // New cakes (moved to top)
+    { src: "/lovable-uploads/ba0b5b4f-dbe1-4912-8678-8cb9094b8cb2.png", alt: "Elegant buttercream cake with gold sprinkles", category: "celebration" },
+    { src: "/lovable-uploads/9a7c3d4e-bd7a-42dd-975b-21068bdf5482.png", alt: "Classic buttercream cake with gold and silver pearls", category: "celebration" },
+    { src: "/lovable-uploads/e7d96d7a-2c56-4d15-b865-b4626b25ca5c.png", alt: "Colorful cupcakes with two-tone swirl frosting", category: "custom" },
+    { src: "/lovable-uploads/cb6fcf95-6e37-4dbb-90c3-095318b259d2.png", alt: "Golf-themed birthday cake with green frosting", category: "birthday" },
+    { src: "/lovable-uploads/4378fa88-dfec-48f6-8bf7-d17076bab098.png", alt: "Elegant buttercream cake with gold crumbs", category: "celebration" },
+    { src: "/lovable-uploads/6746de6e-2e6d-47d7-9055-00c7e7ba9953.png", alt: "Mint green cake with fresh flowers and gold pearls", category: "celebration" },
+    { src: "/lovable-uploads/ceefad72-833c-4aea-9001-535d3621f06d.png", alt: "Gold lettered birthday cake", category: "birthday" },
+    { src: "/lovable-uploads/713a0c6a-6bda-4e0e-80b6-35334e025c52.png", alt: "Galaxy-themed blue cake with decorative sprinkles", category: "custom" },
+    { src: "/lovable-uploads/c5b2c8b8-259b-4763-8e1a-789553cd7245.png", alt: "Deep blue galaxy cake with sprinkles", category: "custom" },
+    { src: "/lovable-uploads/df6403d7-9297-47e3-9531-7615ce345ac0.png", alt: "Pastel pink and blue square cakes", category: "custom" },
+    { src: "/lovable-uploads/aa77b7d2-3ae0-4591-885f-0d7021694e2a.png", alt: "Collection of themed cakes including a race track design", category: "birthday" },
+    
     // Original cakes
     { src: "/lovable-uploads/46f0c743-b2db-495a-b89e-c3aebe67c208.png", alt: "Construction Themed Birthday Cake - Oliver", category: "birthday" },
     { src: "/lovable-uploads/72059ea2-4e6a-4f36-83ba-3328dd2b2e08.png", alt: "Cookies and Cream Drip Cake", category: "celebration" },
@@ -32,20 +45,7 @@ const Gallery = () => {
     { src: "/lovable-uploads/d1ad5bbb-09ac-4496-b492-8b369bd16e0d.png", alt: "Nut & Bolt Factory Anniversary Cake", category: "celebration" },
     { src: "/lovable-uploads/8a5118da-7f18-4b4a-9848-613016fd036c.png", alt: "Gold and Silver Pearl Decorated Cake", category: "celebration" },
     { src: "/lovable-uploads/4c53d181-5c79-45ff-8e10-13106a0bda15.png", alt: "Gold Dust Celebration Cake", category: "celebration" },
-    { src: "/lovable-uploads/a2c687c1-4994-4124-97de-24729a81db11.png", alt: "Golf Theme Birthday Cake", category: "birthday" },
-    
-    // New cakes
-    { src: "/lovable-uploads/ba0b5b4f-dbe1-4912-8678-8cb9094b8cb2.png", alt: "Elegant buttercream cake with gold sprinkles", category: "celebration" },
-    { src: "/lovable-uploads/9a7c3d4e-bd7a-42dd-975b-21068bdf5482.png", alt: "Classic buttercream cake with gold and silver pearls", category: "celebration" },
-    { src: "/lovable-uploads/e7d96d7a-2c56-4d15-b865-b4626b25ca5c.png", alt: "Colorful cupcakes with two-tone swirl frosting", category: "custom" },
-    { src: "/lovable-uploads/cb6fcf95-6e37-4dbb-90c3-095318b259d2.png", alt: "Golf-themed birthday cake with green frosting", category: "birthday" },
-    { src: "/lovable-uploads/4378fa88-dfec-48f6-8bf7-d17076bab098.png", alt: "Elegant buttercream cake with gold crumbs", category: "celebration" },
-    { src: "/lovable-uploads/6746de6e-2e6d-47d7-9055-00c7e7ba9953.png", alt: "Mint green cake with fresh flowers and gold pearls", category: "celebration" },
-    { src: "/lovable-uploads/ceefad72-833c-4aea-9001-535d3621f06d.png", alt: "Gold lettered birthday cake", category: "birthday" },
-    { src: "/lovable-uploads/713a0c6a-6bda-4e0e-80b6-35334e025c52.png", alt: "Galaxy-themed blue cake with decorative sprinkles", category: "custom" },
-    { src: "/lovable-uploads/c5b2c8b8-259b-4763-8e1a-789553cd7245.png", alt: "Deep blue galaxy cake with sprinkles", category: "custom" },
-    { src: "/lovable-uploads/df6403d7-9297-47e3-9531-7615ce345ac0.png", alt: "Pastel pink and blue square cakes", category: "custom" },
-    { src: "/lovable-uploads/aa77b7d2-3ae0-4591-885f-0d7021694e2a.png", alt: "Collection of themed cakes including a race track design", category: "birthday" }
+    { src: "/lovable-uploads/a2c687c1-4994-4124-97de-24729a81db11.png", alt: "Golf Theme Birthday Cake", category: "birthday" }
   ];
 
   const container = {
@@ -111,7 +111,7 @@ const Gallery = () => {
                   image={image}
                   setSelectedImage={setSelectedImage}
                   variants={item}
-                  isNew={index >= 24} // Mark images as new if they're from the newly added set
+                  isNew={index < 11} // Mark the first 11 images as new (the reordered new cakes)
                 />
               ))}
             </motion.div>
@@ -133,7 +133,7 @@ const Gallery = () => {
                       image={image}
                       setSelectedImage={setSelectedImage}
                       variants={item}
-                      isNew={allCakes.indexOf(image) >= 24} // Mark images as new if they're from the newly added set
+                      isNew={allCakes.indexOf(image) < 11} // Mark images as new if they're in the first 11 positions
                     />
                   ))}
               </motion.div>
