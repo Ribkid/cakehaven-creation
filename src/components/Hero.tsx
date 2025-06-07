@@ -1,3 +1,4 @@
+
 import { Button } from "./ui/button";
 import { track } from '@vercel/analytics';
 import { motion } from "framer-motion";
@@ -35,7 +36,7 @@ const Hero = () => {
             transition={{ delay: 0.3 }}
             className="text-brown inline-block mb-3 text-sm font-medium tracking-wider border border-brown/20 rounded-full px-3 py-1 bg-white/50 backdrop-blur-sm"
           >
-            HANDMADE WITH LOVE
+            BRISBANE & IPSWICH'S PREMIER CAKE MAKER
           </motion.span>
           
           <motion.h1 
@@ -44,10 +45,10 @@ const Hero = () => {
             transition={{ delay: 0.4, duration: 0.5 }}
             className="text-5xl lg:text-6xl xl:text-7xl font-serif mb-6 text-brown-dark leading-tight"
           >
-            Homemade Taste, 
+            Custom Cakes 
             <br />
             <span className="relative">
-              Professional Touch
+              Brisbane & Ipswich
               <span className="absolute bottom-2 left-0 w-full h-2 bg-gold/30 -z-10"></span>
             </span>
           </motion.h1>
@@ -58,9 +59,9 @@ const Hero = () => {
             transition={{ delay: 0.5, duration: 0.5 }}
             className="text-lg lg:text-xl mb-8 text-brown leading-relaxed"
           >
-            Every cake we create brings back memories of warm kitchens and the comforting 
-            aroma of freshly baked treats. Our recipes combine traditional homemade 
-            goodness with professional expertise.
+            Artisan wedding cakes, birthday celebrations, and custom designs crafted with love. 
+            Serving Brisbane and Ipswich councils with fresh-baked excellence and local delivery. 
+            Every cake combines traditional homemade goodness with professional cake decorating expertise.
           </motion.p>
           
           <motion.div
@@ -72,7 +73,7 @@ const Hero = () => {
               className="bg-brown hover:bg-brown-dark text-cream text-lg px-8 py-6 rounded-full group shadow-lg hover:shadow-xl transition-all duration-300"
               onClick={handleOrderClick}
             >
-              Order Your Cake
+              Order Your Custom Cake
               <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
             </Button>
           </motion.div>
@@ -91,7 +92,7 @@ const Hero = () => {
             <div className="relative z-10 overflow-hidden rounded-3xl shadow-2xl border-4 border-white bg-white">
               <img
                 src="/lovable-uploads/382ad5db-e7ad-47d3-bd8d-960d2a4f04f0.png"
-                alt="Beautiful pink celebration cake with piped decorations"
+                alt="Custom wedding cake Brisbane - Beautiful pink celebration cake with professional piped decorations"
                 className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-brown/20 to-transparent opacity-60"></div>
@@ -99,7 +100,7 @@ const Hero = () => {
             <div className="absolute -bottom-4 -right-4 bg-white rounded-lg p-3 shadow-lg z-20 border border-brown/10">
               <p className="text-brown-dark font-serif text-sm">
                 <span className="text-gold font-bold">★★★★★</span> <br />
-                "Absolutely delicious!"
+                "Best cakes in Brisbane!"
               </p>
             </div>
           </div>
