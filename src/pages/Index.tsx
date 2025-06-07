@@ -1,6 +1,7 @@
 
 import Hero from "@/components/Hero";
 import Featured from "@/components/Featured";
+import ServiceAreas from "@/components/ServiceAreas";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
 import KeyPoints from "@/components/KeyPoints";
@@ -13,6 +14,7 @@ const Index = () => {
     <main className="min-h-screen">
       <Hero />
       <Featured />
+      <ServiceAreas />
       <Pricing />
       <About />
       <KeyPoints />
