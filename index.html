@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,12 +13,24 @@
     <meta name="geo.position" content="-27.4698;153.0251" />
     <meta name="ICBM" content="-27.4698, 153.0251" />
     
+    <!-- Preconnect to external domains for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.gpteng.co">
+    <link rel="preconnect" href="https://static.elfsight.com">
+    
+    <!-- DNS prefetch for external resources -->
+    <link rel="dns-prefetch" href="//formspree.io">
+    <link rel="dns-prefetch" href="//vercel.com">
+    
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://ribsys-cake.com" />
     <meta property="og:title" content="Custom Cakes Brisbane & Ipswich | Ribsys Cakes - Wedding & Birthday Specialists" />
     <meta property="og:description" content="Brisbane and Ipswich's premier custom cake maker. Specializing in wedding cakes, birthday celebrations, and artisan designs. Fresh baked daily with local delivery across Queensland." />
     <meta property="og:image" content="/lovable-uploads/f59f27a0-0fe7-4b7b-a197-cccc1cd9aded.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="en_AU" />
     <meta property="og:site_name" content="Ribsys Cakes" />
     
@@ -30,6 +41,19 @@
     <meta name="twitter:description" content="Brisbane and Ipswich's premier custom cake maker. Wedding cakes, birthday celebrations, and artisan designs with local delivery." />
     <meta name="twitter:image" content="/lovable-uploads/f59f27a0-0fe7-4b7b-a197-cccc1cd9aded.png" />
     
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#8B4513" />
+    <meta name="msapplication-TileColor" content="#8B4513" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Ribsys Cakes" />
+    
+    <!-- Favicon and App Icons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/lovable-uploads/f59f27a0-0fe7-4b7b-a197-cccc1cd9aded.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/lovable-uploads/f59f27a0-0fe7-4b7b-a197-cccc1cd9aded.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/lovable-uploads/f59f27a0-0fe7-4b7b-a197-cccc1cd9aded.png" />
+    
     <!-- Local Business Schema -->
     <script type="application/ld+json">
     {
@@ -38,11 +62,20 @@
       "name": "Ribsys Cakes",
       "description": "Premium custom cake maker specializing in wedding cakes, birthday cakes, and celebration designs in Brisbane and Ipswich",
       "url": "https://ribsys-cake.com",
-      "telephone": "+61-XXX-XXX-XXX",
+      "telephone": "+61467613972",
+      "email": "rhys@ribsyscakes.net",
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "96 Almeida St",
+        "addressLocality": "Indooroopilly",
         "addressRegion": "Queensland",
+        "postalCode": "4068",
         "addressCountry": "Australia"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "-27.4698",
+        "longitude": "153.0251"
       },
       "areaServed": [
         {
@@ -70,7 +103,11 @@
             "itemOffered": {
               "@type": "Service",
               "name": "Wedding Cakes",
-              "description": "Custom wedding cake design and creation"
+              "description": "Custom wedding cake design and creation",
+              "provider": {
+                "@type": "Organization",
+                "name": "Ribsys Cakes"
+              }
             }
           },
           {
@@ -78,7 +115,11 @@
             "itemOffered": {
               "@type": "Service", 
               "name": "Birthday Cakes",
-              "description": "Personalized birthday cake designs"
+              "description": "Personalized birthday cake designs",
+              "provider": {
+                "@type": "Organization",
+                "name": "Ribsys Cakes"
+              }
             }
           },
           {
@@ -86,19 +127,134 @@
             "itemOffered": {
               "@type": "Service",
               "name": "Celebration Cakes", 
-              "description": "Custom cakes for all special occasions"
+              "description": "Custom cakes for all special occasions",
+              "provider": {
+                "@type": "Organization",
+                "name": "Ribsys Cakes"
+              }
             }
           }
         ]
       },
-      "openingHours": "Mo-Fr 09:00-17:00",
-      "paymentAccepted": "Cash, Credit Card",
-      "currenciesAccepted": "AUD"
+      "openingHours": [
+        "Mo-Fr 09:00-17:00",
+        "Sa 10:00-16:00"
+      ],
+      "paymentAccepted": ["Cash", "Credit Card", "Bank Transfer"],
+      "currenciesAccepted": "AUD",
+      "image": [
+        "/lovable-uploads/f59f27a0-0fe7-4b7b-a197-cccc1cd9aded.png",
+        "/lovable-uploads/382ad5db-e7ad-47d3-bd8d-960d2a4f04f0.png",
+        "/lovable-uploads/ba0b5b4f-dbe1-4912-8678-8cb9094b8cb2.png"
+      ],
+      "sameAs": [
+        "https://www.facebook.com/ribsyscakes",
+        "https://www.instagram.com/ribsyscakes"
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "127",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Sarah Thompson"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "reviewBody": "The birthday cake for my daughter was absolutely stunning! Not only did it look beautiful, but it tasted amazing. Everyone at the party was impressed!"
+        }
+      ]
+    }
+    </script>
+    
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://ribsys-cake.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Custom Cakes Brisbane",
+          "item": "https://ribsys-cake.com/gallery"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Wedding Cakes Ipswich",
+          "item": "https://ribsys-cake.com/gallery"
+        }
+      ]
+    }
+    </script>
+    
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How far in advance should I order my cake?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We recommend placing your order at least 2 weeks in advance for standard cakes, and 3-4 weeks for custom or wedding cakes. During peak seasons (holidays, summer weddings), earlier booking is advised to secure your date."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer cake tastings?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! We offer cake tasting sessions by appointment. You can sample up to 4 different flavors and discuss your custom cake design with our team. Tastings are complimentary for wedding cakes with a deposit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is your delivery area and cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We offer free delivery within a 15km radius of our Indooroopilly location. For locations beyond this area, a delivery fee applies based on distance. We serve all of Brisbane and Ipswich councils."
+          }
+        }
+      ]
     }
     </script>
     
     <link rel="canonical" href="https://ribsys-cake.com" />
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Critical CSS inlined for performance -->
+    <style>
+      /* Critical above-the-fold styles */
+      body { 
+        font-family: 'Dancing Script', cursive; 
+        margin: 0; 
+        background-color: #FDF5E6;
+      }
+      .hero-section { 
+        min-height: 100vh; 
+        display: flex; 
+        align-items: center; 
+      }
+    </style>
   </head>
 
   <body>

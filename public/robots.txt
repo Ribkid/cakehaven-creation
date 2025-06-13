@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://ribsys-cake.com/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Disallow admin areas
+Disallow: /admin
+Disallow: /auth
+Disallow: /api/
+
+# Allow important pages
+Allow: /
+Allow: /gallery
+Allow: /flavours
+Allow: /pricing
+Allow: /faq
+Allow: /contact
+Allow: /order

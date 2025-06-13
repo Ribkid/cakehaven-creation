@@ -1,8 +1,10 @@
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { X } from "lucide-react";
+import SEOHead from "@/components/SEOHead";
+import LazyImage from "@/components/LazyImage";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -67,112 +69,137 @@ const Gallery = () => {
     }
   };
 
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    "name": "Custom Cake Gallery - Brisbane & Ipswich",
+    "description": "Browse our collection of custom-designed cakes, from birthday celebrations to wedding cakes in Brisbane and Ipswich.",
+    "url": "https://ribsys-cake.com/gallery",
+    "image": allCakes.slice(0, 10).map(cake => ({
+      "@type": "ImageObject",
+      "url": `https://ribsys-cake.com${cake.src}`,
+      "description": cake.alt
+    }))
+  };
+
   return (
-    <div className="min-h-screen pt-24 bg-gradient-to-b from-cream to-white">
-      <div className="container mx-auto px-4 pb-16">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-12"
-        >
-          <h1 className="text-5xl font-cursive text-brown-dark mb-4">Our Cake Gallery</h1>
-          <div className="w-24 h-1 bg-gradient-to-r from-brown to-brown-light mx-auto mb-6"></div>
-          <p className="text-brown max-w-2xl mx-auto text-lg">
-            Browse our collection of custom-designed cakes, each one crafted with care and creativity.
-            From birthday celebrations to special events, we bring your cake dreams to life.
-          </p>
-        </motion.div>
-        
-        <Tabs defaultValue="all" className="w-full">
+    <>
+      <SEOHead 
+        title="Custom Cake Gallery Brisbane & Ipswich | Wedding & Birthday Cakes"
+        description="Browse our stunning collection of custom cakes in Brisbane and Ipswich. Wedding cakes, birthday celebrations, themed designs and more."
+        keywords="cake gallery Brisbane, wedding cake photos Ipswich, birthday cake designs, custom cake examples, celebration cakes Brisbane"
+        url="https://ribsys-cake.com/gallery"
+        schemaData={schemaData}
+      />
+      
+      <div className="min-h-screen pt-24 bg-gradient-to-b from-cream to-white">
+        <div className="container mx-auto px-4 pb-16">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-12"
           >
-            <TabsList className="w-full justify-center bg-cream/50 border border-brown/10 mb-12 rounded-full p-1">
-              <TabsTrigger value="all" className="text-brown data-[state=active]:bg-white rounded-full data-[state=active]:text-brown-dark transition-all duration-300">All Cakes</TabsTrigger>
-              <TabsTrigger value="birthday" className="text-brown data-[state=active]:bg-white rounded-full data-[state=active]:text-brown-dark transition-all duration-300">Birthday</TabsTrigger>
-              <TabsTrigger value="custom" className="text-brown data-[state=active]:bg-white rounded-full data-[state=active]:text-brown-dark transition-all duration-300">Custom</TabsTrigger>
-              <TabsTrigger value="celebration" className="text-brown data-[state=active]:bg-white rounded-full data-[state=active]:text-brown-dark transition-all duration-300">Celebration</TabsTrigger>
-            </TabsList>
+            <h1 className="text-5xl font-cursive text-brown-dark mb-4">Our Cake Gallery</h1>
+            <div className="w-24 h-1 bg-gradient-to-r from-brown to-brown-light mx-auto mb-6"></div>
+            <p className="text-brown max-w-2xl mx-auto text-lg">
+              Browse our collection of custom-designed cakes, each one crafted with care and creativity.
+              From birthday celebrations to special events, we bring your cake dreams to life.
+            </p>
           </motion.div>
-
-          <TabsContent value="all">
-            <motion.div 
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-              variants={container}
-              initial="hidden"
-              animate="visible"
+          
+          <Tabs defaultValue="all" className="w-full">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
             >
-              {allCakes.map((image, index) => (
-                <GalleryItem 
-                  key={index}
-                  image={image}
-                  setSelectedImage={setSelectedImage}
-                  variants={item}
-                  isNew={index < 11} // Mark the first 11 images as new (the reordered new cakes)
-                />
-              ))}
+              <TabsList className="w-full justify-center bg-cream/50 border border-brown/10 mb-12 rounded-full p-1">
+                <TabsTrigger value="all" className="text-brown data-[state=active]:bg-white rounded-full data-[state=active]:text-brown-dark transition-all duration-300">All Cakes</TabsTrigger>
+                <TabsTrigger value="birthday" className="text-brown data-[state=active]:bg-white rounded-full data-[state=active]:text-brown-dark transition-all duration-300">Birthday</TabsTrigger>
+                <TabsTrigger value="custom" className="text-brown data-[state=active]:bg-white rounded-full data-[state=active]:text-brown-dark transition-all duration-300">Custom</TabsTrigger>
+                <TabsTrigger value="celebration" className="text-brown data-[state=active]:bg-white rounded-full data-[state=active]:text-brown-dark transition-all duration-300">Celebration</TabsTrigger>
+              </TabsList>
             </motion.div>
-          </TabsContent>
 
-          {["birthday", "custom", "celebration"].map((category) => (
-            <TabsContent key={category} value={category}>
+            <TabsContent value="all">
               <motion.div 
                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
                 variants={container}
                 initial="hidden"
                 animate="visible"
               >
-                {allCakes
-                  .filter(cake => cake.category === category)
-                  .map((image, index) => (
-                    <GalleryItem 
-                      key={index}
-                      image={image}
-                      setSelectedImage={setSelectedImage}
-                      variants={item}
-                      isNew={allCakes.indexOf(image) < 11} // Mark images as new if they're in the first 11 positions
-                    />
-                  ))}
+                {allCakes.map((image, index) => (
+                  <GalleryItem 
+                    key={index}
+                    image={image}
+                    setSelectedImage={setSelectedImage}
+                    variants={item}
+                    isNew={index < 11} // Mark the first 11 images as new (the reordered new cakes)
+                  />
+                ))}
               </motion.div>
             </TabsContent>
-          ))}
-        </Tabs>
-      </div>
 
-      {/* Lightbox */}
-      {selectedImage && (
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/80 z-50 backdrop-blur-sm flex items-center justify-center p-4"
-          onClick={() => setSelectedImage(null)}
-        >
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ type: "spring", damping: 25 }}
-            className="relative max-w-4xl max-h-[90vh] w-full bg-white p-2 rounded-lg shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
+            {["birthday", "custom", "celebration"].map((category) => (
+              <TabsContent key={category} value={category}>
+                <motion.div 
+                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+                  variants={container}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  {allCakes
+                    .filter(cake => cake.category === category)
+                    .map((image, index) => (
+                      <GalleryItem 
+                        key={index}
+                        image={image}
+                        setSelectedImage={setSelectedImage}
+                        variants={item}
+                        isNew={allCakes.indexOf(image) < 11} // Mark images as new if they're in the first 11 positions
+                      />
+                    ))}
+                </motion.div>
+              </TabsContent>
+            ))}
+          </Tabs>
+        </div>
+
+        {/* Lightbox */}
+        {selectedImage && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/80 z-50 backdrop-blur-sm flex items-center justify-center p-4"
+            onClick={() => setSelectedImage(null)}
           >
-            <button 
-              className="absolute -top-4 -right-4 bg-brown-dark text-white p-2 rounded-full hover:bg-brown transition-colors"
-              onClick={() => setSelectedImage(null)}
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ type: "spring", damping: 25 }}
+              className="relative max-w-4xl max-h-[90vh] w-full bg-white p-2 rounded-lg shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
             >
-              <X size={18} />
-            </button>
-            <img
-              src={selectedImage}
-              alt="Selected cake"
-              className="w-full h-full object-contain rounded-md"
-            />
+              <button 
+                className="absolute -top-4 -right-4 bg-brown-dark text-white p-2 rounded-full hover:bg-brown transition-colors"
+                onClick={() => setSelectedImage(null)}
+                aria-label="Close image"
+              >
+                <X size={18} />
+              </button>
+              <LazyImage
+                src={selectedImage}
+                alt="Selected cake"
+                className="w-full h-full object-contain rounded-md"
+                loading="eager"
+              />
+            </motion.div>
           </motion.div>
-        </motion.div>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   );
 };
 
@@ -188,11 +215,25 @@ interface GalleryItemProps {
 }
 
 const GalleryItem = ({ image, setSelectedImage, variants, isNew = false }: GalleryItemProps) => {
+  const { elementRef, isIntersecting } = useIntersectionObserver({
+    threshold: 0.1,
+    triggerOnce: true
+  });
+
   return (
     <motion.div 
+      ref={elementRef}
       variants={variants}
-      className="relative group overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 bg-white h-64"
+      className="relative group overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 bg-white h-64 cursor-pointer"
       onClick={() => setSelectedImage(image.src)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          setSelectedImage(image.src);
+        }
+      }}
+      aria-label={`View ${image.alt} in full size`}
     >
       {isNew && (
         <div className="absolute top-3 right-3 z-10">
@@ -207,11 +248,13 @@ const GalleryItem = ({ image, setSelectedImage, variants, isNew = false }: Galle
           {image.category} Cake
         </span>
       </div>
-      <img
-        src={image.src}
-        alt={image.alt}
-        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-      />
+      {isIntersecting && (
+        <LazyImage
+          src={image.src}
+          alt={image.alt}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+        />
+      )}
     </motion.div>
   );
 };

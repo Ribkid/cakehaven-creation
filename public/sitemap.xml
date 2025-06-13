@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://ribsys-cake.com/</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://ribsys-cake.com/lovable-uploads/f59f27a0-0fe7-4b7b-a197-cccc1cd9aded.png</image:loc>
+      <image:caption>Ribsys Cakes Logo - Custom Cakes Brisbane</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Gallery -->
+  <url>
+    <loc>https://ribsys-cake.com/gallery</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://ribsys-cake.com/lovable-uploads/ba0b5b4f-dbe1-4912-8678-8cb9094b8cb2.png</image:loc>
+      <image:caption>Elegant buttercream cake with gold sprinkles</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ribsys-cake.com/lovable-uploads/382ad5db-e7ad-47d3-bd8d-960d2a4f04f0.png</image:loc>
+      <image:caption>Custom wedding cake Brisbane</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Flavours -->
+  <url>
+    <loc>https://ribsys-cake.com/flavours</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Pricing -->
+  <url>
+    <loc>https://ribsys-cake.com/pricing</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- FAQ -->
+  <url>
+    <loc>https://ribsys-cake.com/faq</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Contact -->
+  <url>
+    <loc>https://ribsys-cake.com/contact</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Order -->
+  <url>
+    <loc>https://ribsys-cake.com/order</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+</urlset>
