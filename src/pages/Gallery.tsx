@@ -1,3 +1,4 @@
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -10,7 +11,13 @@ const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const allCakes = [
-    // New cakes (moved to top)
+    // Latest new cakes (just added)
+    { src: "/lovable-uploads/db490ca8-ed17-4a9d-897a-510b4b04d43d.png", alt: "Fresh flower celebration cake with pink and purple gerberas and gold pearls", category: "celebration" },
+    { src: "/lovable-uploads/c14c9382-d4c6-4737-ace6-0ca818fa58b1.png", alt: "Rainbow rose cupcakes with gold pearl decorations", category: "custom" },
+    { src: "/lovable-uploads/84880fad-e8ed-4a13-a77d-01df24d543bb.png", alt: "Pastel rainbow swirl cupcakes with gold pearl accents", category: "custom" },
+    { src: "/lovable-uploads/2f999085-3dad-4cb6-a10a-9e4ecbc69a5a.png", alt: "My Melody character cake with coral buttercream border", category: "birthday" },
+    
+    // Previous new cakes
     { src: "/lovable-uploads/ba0b5b4f-dbe1-4912-8678-8cb9094b8cb2.png", alt: "Elegant buttercream cake with gold sprinkles", category: "celebration" },
     { src: "/lovable-uploads/9a7c3d4e-bd7a-42dd-975b-21068bdf5482.png", alt: "Classic buttercream cake with gold and silver pearls", category: "celebration" },
     { src: "/lovable-uploads/e7d96d7a-2c56-4d15-b865-b4626b25ca5c.png", alt: "Colorful cupcakes with two-tone swirl frosting", category: "custom" },
@@ -135,7 +142,7 @@ const Gallery = () => {
                     image={image}
                     setSelectedImage={setSelectedImage}
                     variants={item}
-                    isNew={index < 11} // Mark the first 11 images as new (the reordered new cakes)
+                    isNew={index < 15} // Mark the first 15 images as new (including the 4 latest additions)
                   />
                 ))}
               </motion.div>
@@ -157,7 +164,7 @@ const Gallery = () => {
                         image={image}
                         setSelectedImage={setSelectedImage}
                         variants={item}
-                        isNew={allCakes.indexOf(image) < 11} // Mark images as new if they're in the first 11 positions
+                        isNew={allCakes.indexOf(image) < 15} // Mark images as new if they're in the first 15 positions
                       />
                     ))}
                 </motion.div>
