@@ -1,6 +1,7 @@
+
 import { useState, useRef } from 'react';
 import { motion } from "framer-motion";
-import { X, ChevronLeft, ChevronRight, Heart, Star } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, Heart, Star, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import SEOHead from "@/components/SEOHead";
@@ -180,10 +181,24 @@ const Gallery = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl text-brown max-w-3xl mx-auto font-clean leading-relaxed"
+            className="text-xl text-brown max-w-3xl mx-auto font-clean leading-relaxed mb-8"
           >
             Explore our delicious gallery of custom cakes, each crafted with love and designed to make your celebration unforgettable.
           </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <Button
+              onClick={() => navigate('/order')}
+              className="bg-brown hover:bg-brown-dark text-cream text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 font-clean"
+              size="lg"
+            >
+              <ShoppingBag className="w-5 h-5 mr-2" />
+              Order Your Dream Cake
+            </Button>
+          </motion.div>
         </header>
 
         {/* Category Buttons */}

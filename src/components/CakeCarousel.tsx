@@ -128,7 +128,7 @@ const CakeCarousel = () => {
                       initial={{ y: 20, opacity: 0 }}
                       animate={hoveredIndex === index ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
                       transition={{ duration: 0.3 }}
-                      className="text-white font-cursive text-xl mb-1"
+                      className="text-white font-elegant text-xl mb-1"
                     >
                       {cake.style}
                     </motion.span>
@@ -145,7 +145,7 @@ const CakeCarousel = () => {
                       className="text-cream/90 text-sm"
                     >
                       Click to view in gallery
-                    </span>
+                    </motion.span>
                   </div>
                   <div className="absolute top-3 right-3 z-10">
                     <span className="bg-cream/80 text-brown text-xs font-medium px-2 py-1 rounded-full backdrop-blur-sm">

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -17,7 +16,10 @@ import {
   Square,
   Heart,
   CakeSlice,
-  CheckCircle
+  CheckCircle,
+  Upload,
+  X,
+  Image as ImageIcon
 } from "lucide-react";
 
 // UI Components
@@ -59,7 +61,7 @@ const cakeDetailsSchema = z.object({
   message: z.string().min(10, { message: "Please provide details about your order" }),
 });
 
-// Combined schema for the whole form
+// Updated combined schema for the whole form
 const orderFormSchema = personalInfoSchema.merge(cakeDetailsSchema);
 type OrderFormValues = z.infer<typeof orderFormSchema>;
 
@@ -69,7 +71,9 @@ const Order = () => {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const totalSteps = 3; // Now we have 3 steps: personal info, cake shape/details, and cake size/flavor
+  const [uploadedImages, setUploadedImages] = useState<File[]>([]);
+  const [inspirationChoice, setInspirationChoice] = useState<"gallery" | "upload">("gallery");
+  const totalSteps = 4; // Now we have 4 steps: personal info, cake shape, inspiration, and cake details
   
   // Calculate progress percentage
   const progressPercentage = (step / totalSteps) * 100;
@@ -118,7 +122,25 @@ const Order = () => {
     window.scrollTo(0, 0);
   };
 
-  // Form submission
+  // Image upload handling
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(event.target.files || []);
+    if (files.length + uploadedImages.length > 3) {
+      toast({
+        variant: "destructive",
+        title: "Too many images",
+        description: "You can upload a maximum of 3 inspiration images.",
+      });
+      return;
+    }
+    setUploadedImages(prev => [...prev, ...files]);
+  };
+
+  const removeImage = (index: number) => {
+    setUploadedImages(prev => prev.filter((_, i) => i !== index));
+  };
+
+  // Updated form submission
   const handleSubmit = async (data: OrderFormValues) => {
     setIsSubmitting(true);
     
@@ -136,6 +158,12 @@ const Order = () => {
       formData.append("flavor", data.flavor);
       formData.append("date", format(data.date, "yyyy-MM-dd"));
       formData.append("message", data.message);
+      formData.append("inspirationChoice", inspirationChoice);
+      
+      // Add uploaded images
+      uploadedImages.forEach((file, index) => {
+        formData.append(`inspirationImage${index + 1}`, file);
+      });
       
       const response = await fetch("https://formspree.io/f/xyzkjdjn", {
         method: "POST",
@@ -153,6 +181,8 @@ const Order = () => {
         });
         form.reset();
         setStep(1);
+        setUploadedImages([]);
+        setInspirationChoice("gallery");
       } else {
         track('Order Form Submit', { status: 'error' });
         toast({
@@ -202,12 +232,13 @@ const Order = () => {
         {/* Progress Indicator */}
         <div className="max-w-2xl mx-auto mb-8">
           <div className="bg-white p-4 rounded-lg shadow-md">
-            <p className="text-brown mb-2 text-center font-cursive">Order Progress</p>
+            <p className="text-brown mb-2 text-center font-clean">Order Progress</p>
             <Progress value={progressPercentage} className="h-2 mb-2" />
-            <div className="flex justify-between text-xs text-brown font-cursive">
+            <div className="flex justify-between text-xs text-brown font-clean">
               <span className={cn(step === 1 ? "font-bold" : "")}>Your Details</span>
               <span className={cn(step === 2 ? "font-bold" : "")}>Cake Shape</span>
-              <span className={cn(step === 3 ? "font-bold" : "")}>Cake Details</span>
+              <span className={cn(step === 3 ? "font-bold" : "")}>Inspiration</span>
+              <span className={cn(step === 4 ? "font-bold" : "")}>Cake Details</span>
             </div>
           </div>
         </div>
@@ -408,7 +439,128 @@ const Order = () => {
 
               {step === 3 && (
                 <div className="space-y-6 animate-fade-in">
-                  <h2 className="text-2xl font-cursive text-brown-dark text-center mb-6">Step 3: Cake Details</h2>
+                  <h2 className="text-2xl font-cursive text-brown-dark text-center mb-6">Step 3: Cake Inspiration</h2>
+                  
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div
+                        className={cn(
+                          "p-4 border-2 rounded-lg cursor-pointer transition-all",
+                          inspirationChoice === "gallery" ? "border-brown bg-cream/50" : "border-gray-200 hover:border-brown/50"
+                        )}
+                        onClick={() => setInspirationChoice("gallery")}
+                      >
+                        <div className="text-center">
+                          <CakeSlice className={cn("w-12 h-12 mx-auto mb-2", inspirationChoice === "gallery" ? "text-brown" : "text-gray-400")} />
+                          <h3 className="font-clean font-semibold mb-1">Choose from Gallery</h3>
+                          <p className="text-sm text-gray-600">Browse our existing designs</p>
+                        </div>
+                      </div>
+                      
+                      <div
+                        className={cn(
+                          "p-4 border-2 rounded-lg cursor-pointer transition-all",
+                          inspirationChoice === "upload" ? "border-brown bg-cream/50" : "border-gray-200 hover:border-brown/50"
+                        )}
+                        onClick={() => setInspirationChoice("upload")}
+                      >
+                        <div className="text-center">
+                          <Upload className={cn("w-12 h-12 mx-auto mb-2", inspirationChoice === "upload" ? "text-brown" : "text-gray-400")} />
+                          <h3 className="font-clean font-semibold mb-1">Upload Photos</h3>
+                          <p className="text-sm text-gray-600">Share your inspiration images</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {inspirationChoice === "gallery" && (
+                      <div className="text-center p-4 bg-cream/30 rounded-lg">
+                        <p className="text-brown font-clean mb-4">
+                          Perfect! Our team will work with you to create a design based on our gallery styles.
+                        </p>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          onClick={() => window.open('/gallery', '_blank')}
+                          className="border-brown text-brown hover:bg-brown hover:text-cream"
+                        >
+                          <ImageIcon className="w-4 h-4 mr-2" />
+                          View Our Gallery
+                        </Button>
+                      </div>
+                    )}
+
+                    {inspirationChoice === "upload" && (
+                      <div className="space-y-4">
+                        <div className="border-2 border-dashed border-brown/30 rounded-lg p-6 text-center">
+                          <Upload className="w-12 h-12 mx-auto mb-4 text-brown/60" />
+                          <p className="text-brown font-clean mb-4">
+                            Upload up to 3 inspiration photos (Max 5MB each)
+                          </p>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            multiple
+                            onChange={handleImageUpload}
+                            className="hidden"
+                            id="image-upload"
+                          />
+                          <label
+                            htmlFor="image-upload"
+                            className="inline-flex items-center px-4 py-2 bg-brown text-cream rounded-lg cursor-pointer hover:bg-brown-dark transition-colors"
+                          >
+                            <Upload className="w-4 h-4 mr-2" />
+                            Choose Images
+                          </label>
+                        </div>
+
+                        {uploadedImages.length > 0 && (
+                          <div className="grid grid-cols-3 gap-4">
+                            {uploadedImages.map((file, index) => (
+                              <div key={index} className="relative">
+                                <img
+                                  src={URL.createObjectURL(file)}
+                                  alt={`Inspiration ${index + 1}`}
+                                  className="w-full h-24 object-cover rounded-lg"
+                                />
+                                <button
+                                  type="button"
+                                  onClick={() => removeImage(index)}
+                                  className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
+                                >
+                                  <X className="w-3 h-3" />
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="flex gap-4 pt-4">
+                    <Button 
+                      type="button" 
+                      onClick={prevStep}
+                      className="w-1/3 bg-gray-300 hover:bg-gray-400 text-gray-800 font-clean text-base"
+                    >
+                      <ArrowLeft className="mr-2 h-5 w-5" />
+                      Back
+                    </Button>
+                    <Button 
+                      type="button" 
+                      onClick={nextStep}
+                      className="w-2/3 bg-brown hover:bg-brown-dark text-cream font-clean text-base"
+                    >
+                      Continue
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Button>
+                  </div>
+                </div>
+              )}
+
+              {step === 4 && (
+                <div className="space-y-6 animate-fade-in">
+                  <h2 className="text-2xl font-cursive text-brown-dark text-center mb-6">Step 4: Cake Details</h2>
                   
                   <FormField
                     control={form.control}
