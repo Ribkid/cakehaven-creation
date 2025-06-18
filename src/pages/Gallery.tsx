@@ -144,14 +144,14 @@ const Gallery = () => {
     document.body.style.overflow = 'auto';
   };
 
-  const goToPrevious = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const goToPrevious = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     const newIndex = (currentImageIndex - 1 + filteredCakes.length) % filteredCakes.length;
     setSelectedImage(filteredCakes[newIndex].src);
     setCurrentImageIndex(newIndex);
   };
 
-  const goToNext = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const goToNext = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     const newIndex = (currentImageIndex + 1) % filteredCakes.length;
     setSelectedImage(filteredCakes[newIndex].src);

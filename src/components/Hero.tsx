@@ -73,10 +73,12 @@ const Hero = () => {
             transition={{ delay: 0.5, duration: 0.5 }}
             className="text-lg lg:text-xl mb-8 text-brown leading-relaxed font-clean"
           >
-            🎂 <strong>Imagine biting into pure magic.</strong> Every cake we create isn't just dessert—it's the centerpiece that transforms your celebration into an unforgettable memory. From wedding masterpieces to birthday cakes that make kids (and adults!) squeal with joy.
+            <strong>Do you want a cake that tastes as good as it looks?</strong> Everyone deserves to have a special moment, and you can give your loved ones that perfect moment with one of my custom cakes.
+            <br /><br />
+            Each cake is carefully crafted in our licensed commercial kitchen and made fresh to order. Whether it's a wedding, birthday, or celebration, we create memories that taste as amazing as they look.
             <br /><br />
             <Heart className="w-5 h-5 inline text-red-500 mr-2" />
-            <em>Fresh-baked daily in our licensed kitchen • Delivered across Brisbane • Made with love since day one</em>
+            <em>Fresh-baked in our licensed kitchen • Next-day delivery across Brisbane • Made with love since day one</em>
           </motion.p>
           
           <motion.div
