@@ -73,10 +73,10 @@ const Hero = () => {
             transition={{ delay: 0.5, duration: 0.5 }}
             className="text-lg lg:text-xl mb-8 text-brown leading-relaxed font-clean"
           >
-            🎂 <strong>Imagine biting into pure magic.</strong> Every cake we create isn't just dessert—it's the centerpiece that transforms your celebration into an unforgettable memory. From show-stopping wedding masterpieces to birthday cakes that make kids (and adults!) squeal with joy.
+            🎂 <strong>Imagine biting into pure magic.</strong> Every cake we create isn't just dessert—it's the centerpiece that transforms your celebration into an unforgettable memory. From wedding masterpieces to birthday cakes that make kids (and adults!) squeal with joy.
             <br /><br />
             <Heart className="w-5 h-5 inline text-red-500 mr-2" />
-            <em>Fresh-baked daily • Delivered across Brisbane • Made with love since day one</em>
+            <em>Fresh-baked daily in our licensed kitchen • Delivered across Brisbane • Made with love since day one</em>
           </motion.p>
           
           <motion.div
@@ -116,7 +116,7 @@ const Hero = () => {
               Taking orders now
             </span>
             <span>|</span>
-            <span>Same-day delivery available</span>
+            <span>Next-day delivery available</span>
             <span>|</span>
             <span>100% satisfaction guaranteed</span>
           </motion.div>

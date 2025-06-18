@@ -7,19 +7,13 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import Autoplay from "embla-carousel-autoplay";
 import { useNavigate } from "react-router-dom";
 
 const CakeCarousel = () => {
   const navigate = useNavigate();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-
-  const autoplayPlugin = Autoplay({
-    delay: 5000,
-    stopOnInteraction: false,
-  });
 
   const cakes = [
     {
@@ -105,7 +99,6 @@ const CakeCarousel = () => {
       </motion.div>
 
       <Carousel
-        plugins={[autoplayPlugin]}
         className="max-w-5xl mx-auto px-4"
         opts={{
           align: "center",
@@ -152,7 +145,7 @@ const CakeCarousel = () => {
                       className="text-cream/90 text-sm"
                     >
                       Click to view in gallery
-                    </motion.span>
+                    </span>
                   </div>
                   <div className="absolute top-3 right-3 z-10">
                     <span className="bg-cream/80 text-brown text-xs font-medium px-2 py-1 rounded-full backdrop-blur-sm">

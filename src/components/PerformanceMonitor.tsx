@@ -1,4 +1,20 @@
+
 import { useEffect } from 'react';
+
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
+
+interface PerformanceEntryWithFID extends PerformanceEntry {
+  processingStart?: number;
+}
+
+interface PerformanceEntryWithCLS extends PerformanceEntry {
+  hadRecentInput?: boolean;
+  value?: number;
+}
 
 const PerformanceMonitor = () => {
   useEffect(() => {
@@ -24,14 +40,17 @@ const PerformanceMonitor = () => {
       new PerformanceObserver((list) => {
         const entries = list.getEntries();
         entries.forEach((entry) => {
-          console.log('FID:', entry.processingStart - entry.startTime);
-          
-          if (window.gtag) {
-            window.gtag('event', 'web_vitals', {
-              name: 'FID',
-              value: Math.round(entry.processingStart - entry.startTime),
-              event_category: 'Performance'
-            });
+          const fidEntry = entry as PerformanceEntryWithFID;
+          if (fidEntry.processingStart) {
+            console.log('FID:', fidEntry.processingStart - fidEntry.startTime);
+            
+            if (window.gtag) {
+              window.gtag('event', 'web_vitals', {
+                name: 'FID',
+                value: Math.round(fidEntry.processingStart - fidEntry.startTime),
+                event_category: 'Performance'
+              });
+            }
           }
         });
       }).observe({ entryTypes: ['first-input'] });
@@ -41,8 +60,9 @@ const PerformanceMonitor = () => {
       new PerformanceObserver((list) => {
         const entries = list.getEntries();
         entries.forEach((entry) => {
-          if (!entry.hadRecentInput) {
-            clsValue += entry.value;
+          const clsEntry = entry as PerformanceEntryWithCLS;
+          if (!clsEntry.hadRecentInput && clsEntry.value) {
+            clsValue += clsEntry.value;
           }
         });
         console.log('CLS:', clsValue);

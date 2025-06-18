@@ -1,6 +1,6 @@
 
 import { Card, CardContent } from "./ui/card";
-import { MapPin, Clock, Phone, Heart } from "lucide-react";
+import { MapPin, Clock, Phone, Heart, Shield } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { useNavigate } from "react-router-dom";
@@ -33,7 +33,7 @@ const ServiceAreas = () => {
             Delivering Sweet Dreams Across Brisbane
           </h2>
           <p className="text-xl text-brown max-w-4xl mx-auto font-clean leading-relaxed">
-            From the bustling CBD to the leafy suburbs, we're spreading cake joy across every corner of Brisbane. 
+            From the city center to the suburbs, we're spreading cake joy across every corner of Brisbane. 
             <strong> Your perfect cake is just a delivery away!</strong>
           </p>
         </motion.div>
@@ -59,9 +59,21 @@ const ServiceAreas = () => {
                 </div>
               </div>
               
-              <p className="text-brown mb-8 leading-relaxed font-clean text-lg">
-                🚗 <strong>Lightning-fast delivery</strong> to bring your dream cake straight to your door. Whether you're hosting in the heart of the city or the peaceful suburbs, we've got you covered with same-day delivery options!
+              <p className="text-brown mb-6 leading-relaxed font-clean text-lg">
+                🚗 <strong>Reliable delivery service</strong> brings your dream cake straight to your door. 
+                Cakes are typically delivered the afternoon before your event to ensure freshness and perfect timing.
               </p>
+
+              <div className="bg-cream/50 p-4 rounded-lg mb-6">
+                <div className="flex items-center gap-3 mb-2">
+                  <Shield className="w-5 h-5 text-brown" />
+                  <strong className="text-brown-dark font-clean">Food Safety & Quality</strong>
+                </div>
+                <p className="text-brown font-clean">
+                  All our cakes are crafted in a fully licensed commercial kitchen following strict food safety standards. 
+                  Every creation is made fresh to order and handled with the highest hygiene protocols.
+                </p>
+              </div>
               
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 mb-8">
                 {brisbaneAreas.map((area, areaIndex) => (
@@ -103,10 +115,10 @@ const ServiceAreas = () => {
                 <Clock className="w-10 h-10 text-brown" />
               </div>
               <h4 className="font-elegant text-2xl text-brown-dark mb-3">
-                Same-Day Magic
+                Perfect Timing
               </h4>
               <p className="text-brown text-lg font-clean leading-relaxed">
-                Last-minute party? No worries! We deliver fresh, stunning cakes across Brisbane faster than you can say "surprise!"
+                We deliver your cake the afternoon before your event, ensuring it arrives fresh and ready to impress your guests.
               </p>
             </div>
             
@@ -118,7 +130,7 @@ const ServiceAreas = () => {
                 Made With Love
               </h4>
               <p className="text-brown text-lg font-clean leading-relaxed">
-                Every cake tells your story. We don't just bake - we create edible memories that bring families together
+                Every cake tells your story. We create edible memories that bring families together in our licensed commercial kitchen.
               </p>
             </div>
             
@@ -130,7 +142,7 @@ const ServiceAreas = () => {
                 Personal Touch
               </h4>
               <p className="text-brown text-lg font-clean leading-relaxed">
-                Chat directly with our cake artists who understand Brisbane's unique celebration style and your family's special needs
+                Chat directly with our cake artists who understand Brisbane's celebration style and your family's special needs.
               </p>
             </div>
           </div>
