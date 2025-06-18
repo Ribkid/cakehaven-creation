@@ -2,7 +2,7 @@
 import { Button } from "./ui/button";
 import { track } from '@vercel/analytics';
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Star, Heart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
@@ -11,6 +11,11 @@ const Hero = () => {
   const handleOrderClick = () => {
     track('Hero CTA Click', { button: 'Order Your Cake' });
     navigate('/order');
+  };
+
+  const handleGalleryClick = () => {
+    track('Hero Gallery Click', { button: 'View Gallery' });
+    navigate('/gallery');
   };
 
   return (
@@ -30,26 +35,35 @@ const Hero = () => {
           transition={{ duration: 0.6 }}
           className="flex flex-col justify-center"
         >
-          <motion.span 
+          <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="text-brown inline-block mb-3 text-sm font-medium tracking-wider border border-brown/20 rounded-full px-3 py-1 bg-white/50 backdrop-blur-sm"
+            className="flex items-center gap-2 mb-4"
           >
-            BRISBANE & IPSWICH'S PREMIER CAKE MAKER
-          </motion.span>
+            <span className="text-brown inline-block text-sm font-medium tracking-wider border border-brown/20 rounded-full px-3 py-1 bg-white/50 backdrop-blur-sm font-clean">
+              BRISBANE'S SWEETEST OBSESSION
+            </span>
+            <div className="flex text-gold">
+              <Star className="w-4 h-4 fill-current" />
+              <Star className="w-4 h-4 fill-current" />
+              <Star className="w-4 h-4 fill-current" />
+              <Star className="w-4 h-4 fill-current" />
+              <Star className="w-4 h-4 fill-current" />
+            </div>
+          </motion.div>
           
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.5 }}
-            className="text-5xl lg:text-6xl xl:text-7xl font-serif mb-6 text-brown-dark leading-tight"
+            className="text-5xl lg:text-6xl xl:text-7xl font-elegant mb-6 text-brown-dark leading-tight"
           >
-            Custom Cakes 
+            Dreams Made 
             <br />
             <span className="relative">
-              Brisbane & Ipswich
-              <span className="absolute bottom-2 left-0 w-full h-2 bg-gold/30 -z-10"></span>
+              Delicious
+              <span className="absolute bottom-2 left-0 w-full h-3 bg-gold/30 -z-10"></span>
             </span>
           </motion.h1>
           
@@ -57,25 +71,54 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.5 }}
-            className="text-lg lg:text-xl mb-8 text-brown leading-relaxed"
+            className="text-lg lg:text-xl mb-8 text-brown leading-relaxed font-clean"
           >
-            Artisan wedding cakes, birthday celebrations, and custom designs crafted with love. 
-            Serving Brisbane and Ipswich councils with fresh-baked excellence and local delivery. 
-            Every cake combines traditional homemade goodness with professional cake decorating expertise.
+            🎂 <strong>Imagine biting into pure magic.</strong> Every cake we create isn't just dessert—it's the centerpiece that transforms your celebration into an unforgettable memory. From show-stopping wedding masterpieces to birthday cakes that make kids (and adults!) squeal with joy.
+            <br /><br />
+            <Heart className="w-5 h-5 inline text-red-500 mr-2" />
+            <em>Fresh-baked daily • Delivered across Brisbane • Made with love since day one</em>
           </motion.p>
           
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.5 }}
+            className="flex flex-col sm:flex-row gap-4"
           >
             <Button
-              className="bg-brown hover:bg-brown-dark text-cream text-lg px-8 py-6 rounded-full group shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-brown hover:bg-brown-dark text-cream text-lg px-8 py-6 rounded-full group shadow-lg hover:shadow-xl transition-all duration-300 font-clean"
               onClick={handleOrderClick}
+              size="lg"
             >
-              Order Your Custom Cake
+              Start Your Sweet Journey
               <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
             </Button>
+            
+            <Button
+              variant="outline"
+              className="border-2 border-brown text-brown hover:bg-brown hover:text-cream text-lg px-8 py-6 rounded-full group shadow-lg hover:shadow-xl transition-all duration-300 font-clean"
+              onClick={handleGalleryClick}
+              size="lg"
+            >
+              See The Magic
+              <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+            </Button>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+            className="mt-8 flex items-center gap-4 text-sm text-brown-light font-clean"
+          >
+            <span className="flex items-center gap-1">
+              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+              Taking orders now
+            </span>
+            <span>|</span>
+            <span>Same-day delivery available</span>
+            <span>|</span>
+            <span>100% satisfaction guaranteed</span>
           </motion.div>
         </motion.div>
 
@@ -92,15 +135,18 @@ const Hero = () => {
             <div className="relative z-10 overflow-hidden rounded-3xl shadow-2xl border-4 border-white bg-white">
               <img
                 src="/lovable-uploads/382ad5db-e7ad-47d3-bd8d-960d2a4f04f0.png"
-                alt="Custom wedding cake Brisbane - Beautiful pink celebration cake with professional piped decorations"
+                alt="Stunning custom wedding cake Brisbane - Beautiful pink celebration cake that will make your special day unforgettable"
                 className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-brown/20 to-transparent opacity-60"></div>
             </div>
-            <div className="absolute -bottom-4 -right-4 bg-white rounded-lg p-3 shadow-lg z-20 border border-brown/10">
-              <p className="text-brown-dark font-serif text-sm">
-                <span className="text-gold font-bold">★★★★★</span> <br />
-                "Best cakes in Brisbane!"
+            <div className="absolute -bottom-4 -right-4 bg-white rounded-2xl p-4 shadow-2xl z-20 border border-brown/10">
+              <p className="text-brown-dark font-elegant text-base">
+                <span className="text-gold font-bold text-lg">★★★★★</span>
+                <br />
+                <span className="font-clean font-semibold">"Absolutely magical!"</span>
+                <br />
+                <span className="text-xs text-brown font-clean">- Sarah M., Brisbane</span>
               </p>
             </div>
           </div>

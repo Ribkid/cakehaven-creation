@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -90,11 +91,12 @@
 
   body {
     @apply bg-background text-foreground;
-    font-display: swap; /* Optimize font loading */
+    font-display: swap;
+    font-family: 'Inter', 'Playfair Display', system-ui, -apple-system, sans-serif;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-cursive;
+    @apply font-elegant;
   }
 
   /* Improve focus visibility for accessibility */
@@ -145,15 +147,15 @@
 
 @layer components {
   .cake-title {
-    @apply font-cursive text-3xl md:text-4xl text-brown-dark;
+    @apply font-elegant text-3xl md:text-4xl text-brown-dark;
   }
   
   .cake-subtitle {
-    @apply font-cursive text-xl md:text-2xl text-brown;
+    @apply font-elegant text-xl md:text-2xl text-brown;
   }
   
   .cake-text {
-    @apply font-cursive text-lg text-brown-light;
+    @apply font-elegant text-lg text-brown-light;
   }
 
   /* Performance optimized animations */
@@ -181,19 +183,5 @@
   background: linear-gradient(to bottom, #FDF5E6, #ffffff);
 }
 
-/* Optimize font loading */
-@font-face {
-  font-family: 'Dancing Script';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('https://fonts.gstatic.com/s/dancingscript/v25/If2cXTr6YS-zF4S-kcSWSVi_sxjsohD9F50Ruu7BMSo3ROp-.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Dancing Script';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('https://fonts.gstatic.com/s/dancingscript/v25/If2cXTr6YS-zF4S-kcSWSVi_sxjsohD9F50Ruu7BMSo3ROp-.woff2') format('woff2');
-}
+/* Import better fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');

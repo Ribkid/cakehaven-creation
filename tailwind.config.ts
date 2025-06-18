@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -18,18 +19,7 @@ export default {
       },
     },
     extend: {
-      fontFamily: {
-        cursive: ["Dancing Script", "cursive"],
-        serif: ["Dancing Script", "cursive"],
-      },
       colors: {
-        cream: "#FDF5E6",
-        brown: {
-          light: "#A67B5B",
-          DEFAULT: "#8B4513",
-          dark: "#3E2723",
-        },
-        gold: "#DAA520",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -63,26 +53,47 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        cream: "#FDF5E6",
+        brown: {
+          DEFAULT: "#8B4513",
+          light: "#A0522D",
+          dark: "#654321",
+        },
+        gold: "#FFD700",
+        sidebar: {
+          DEFAULT: "hsl(var(--sidebar-background))",
+          foreground: "hsl(var(--sidebar-foreground))",
+          primary: "hsl(var(--sidebar-primary))",
+          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
+          accent: "hsl(var(--sidebar-accent))",
+          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
+          border: "hsl(var(--sidebar-border))",
+          ring: "hsl(var(--sidebar-ring))",
+        },
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
-        "fade-up": {
-          "0%": { opacity: "0", transform: "translateY(10px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
-        "slide-in": {
-          "0%": { transform: "translateX(-100%)" },
-          "100%": { transform: "translateX(0)" },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
-        "sparkle": {
-          "0%": { transform: "scale(0) rotate(0deg)" },
-          "50%": { transform: "scale(1) rotate(180deg)" },
-          "100%": { transform: "scale(0) rotate(360deg)" },
-        }
       },
       animation: {
-        "fade-up": "fade-up 0.5s ease-out",
-        "slide-in": "slide-in 0.6s ease-out",
-        "sparkle": "sparkle 0.8s linear",
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      fontFamily: {
+        'elegant': ['Playfair Display', 'serif'],
+        'clean': ['Inter', 'sans-serif'],
+        'cursive': ['Dancing Script', 'cursive'], // Keep for minimal use
       },
     },
   },
